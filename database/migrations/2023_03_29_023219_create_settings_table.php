@@ -16,8 +16,8 @@ class CreateSettingsTable extends Migration
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
             $table->tinyInteger('status');
-            $table->json('color');
-            $table->json('style');
+            $table->json('color')->nullable();
+            $table->json('style')->nullable();
             $table->unsignedBigInteger('shop_id');
             $table->foreign('shop_id')->references('id')->on('shops');
             $table->timestamps();

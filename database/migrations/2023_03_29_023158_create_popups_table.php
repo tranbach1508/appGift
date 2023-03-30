@@ -16,8 +16,8 @@ class CreatePopupsTable extends Migration
         Schema::create('popups', function (Blueprint $table) {
             $table->id();
             $table->tinyInteger('type');
-            $table->json('color');
-            $table->json('style');
+            $table->json('color')->nullable();
+            $table->json('style')->nullable();
             $table->unsignedBigInteger('shop_id');
             $table->foreign('shop_id')->references('id')->on('shops');
             $table->timestamps();

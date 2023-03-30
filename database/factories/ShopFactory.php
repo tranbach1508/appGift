@@ -19,7 +19,7 @@ class ShopFactory extends Factory
     {
         return [
             'url'=> $this->faker->url,
-            'email' => $this->faker->unique()->email(),
+            'email' => $this->faker->unique()->freeEmail,
             'theme_id'=> $this->faker->numberBetween(),
         ];
     }

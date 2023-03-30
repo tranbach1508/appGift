@@ -2,11 +2,14 @@
 
 namespace Database\Seeders;
 
+use App\Models\Gift;
+use App\Models\Goal;
+use App\Models\Popup;
+use App\Models\ProgressBar;
+use App\Models\Setting;
 use App\Models\Shop;
-use App\Models\User;
-
+use App\Models\Translation;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
 
 
@@ -21,7 +24,11 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
         Shop::factory(5)->create();
-      
-        
+        ProgressBar::factory(5)->create();
+        Goal::factory(5)->create();
+        Gift::factory(5)->create();
+        Setting::factory(5)->create();
+        Popup::factory(5)->create();
+        Translation::factory(5)->create();
     }
 }

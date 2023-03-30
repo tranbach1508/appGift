@@ -24,7 +24,7 @@ class CreateGoalsTable extends Migration
             $table->integer('times');
             $table->tinyInteger('target_type');
             $table->integer('target');
-            $table->json('condition');
+            $table->json('condition')->nullable();
             $table->text('message');
             $table->timestamps();
         });

@@ -9,7 +9,7 @@ class ProgressBar extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name',	'status',	'color',	'style',	'shop_id',
+        'name',	'status','color','style','shop_id',
     ];
     public function shop()
     {

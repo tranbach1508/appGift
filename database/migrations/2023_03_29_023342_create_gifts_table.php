@@ -19,7 +19,7 @@ class CreateGiftsTable extends Migration
             $table->foreign('shop_id')->references('id')->on('shops');
             $table->integer('product_id');
             $table->string('product_title',255);
-            $table->string('product_handel',255);
+            $table->string('product_handle',255);
             $table->string('product_image',255);
             $table->timestamps();
         });
