@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Setting extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'status',	'color',	'style',	'shop_id'
+    ];
+    public function shop()
+    {
+       return $this->belongsTo(Shop::class);
+    }
 }
