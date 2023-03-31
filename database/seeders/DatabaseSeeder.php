@@ -22,8 +22,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(Request $request)
     {
-        // User::factory(10)->create();
-        Shop::factory(5)->create();
+        $this->call([
+           ShopsSeeder::class
+        ]);
         ProgressBar::factory(5)->create();
         Goal::factory(5)->create();
         Gift::factory(5)->create();

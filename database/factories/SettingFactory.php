@@ -17,7 +17,7 @@ class SettingFactory extends Factory
     {
         $status = [1, 0];
         return [
-            'shop_id' => $this->faker->numberBetween($min=1, $max=5),
+            'shop_id' => $this->faker->numberBetween($min=1, $max=4),
             'status'=> $this->faker->randomElement($status),
             'color'=>null,
             'style'=>null

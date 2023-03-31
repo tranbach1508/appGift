@@ -16,7 +16,7 @@ class TranslationFactory extends Factory
     public function definition()
     {
         return [
-            'shop_id' => $this->faker->numberBetween($min=1, $max=5),
+            'shop_id' => $this->faker->numberBetween($min=1, $max=4),
             'trans'=>null
         ];
     }

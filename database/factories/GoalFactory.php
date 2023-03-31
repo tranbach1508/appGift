@@ -15,16 +15,14 @@ class GoalFactory extends Factory
      */
     public function definition()
     {
-        $name = ["FreeGift","FreeShipping","Disscount"];
-        $status = [1, 0];
-        $type = [1, 2, 0];
+           
         return [
-            'name'=> $this->faker->randomElement($name),
-            'status'=>$this->faker->randomElement($status),
-            'type'=>$this->faker->randomElement($type),
-            'shop_id'=>$this->faker->numberBetween($min=1, $max=5),
+            'name'=> $this->faker->randomElement(["FreeGift","FreeShipping","Disscount"]),
+            'status'=>$this->faker->randomElement([1, 0]),
+            'type'=>$this->faker->randomElement([0, 1, 2]),
+            'shop_id'=>$this->faker->numberBetween($min=1, $max=4),
             'gift_count'=>$this->faker->randomDigitNot(2),
-            'target'=>$this->faker->randomNumber,
+            'target'=>$this->faker->randomFloat(1, 20, 30),
             'target_type'=>$this->faker->numberBetween($min=1, $max=2),
             'times'=>$this->faker->randomDigit,
             'condition'=>null,
