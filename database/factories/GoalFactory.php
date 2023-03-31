@@ -20,7 +20,7 @@ class GoalFactory extends Factory
             'name'=> $this->faker->randomElement(["FreeGift","FreeShipping","Disscount"]),
             'status'=>$this->faker->randomElement([1, 0]),
             'type'=>$this->faker->randomElement([0, 1, 2]),
-            'shop_id'=>$this->faker->numberBetween($min=1, $max=4),
+            'shop_id'=>rand(1, 5),
             'gift_count'=>$this->faker->randomDigitNot(2),
             'target'=>$this->faker->randomFloat(1, 20, 30),
             'target_type'=>$this->faker->numberBetween($min=1, $max=2),

@@ -17,7 +17,7 @@ class PopupFactory extends Factory
     {
         $type = [1,0];
         return [
-            'shop_id'=>$this->faker->numberBetween($min=1, $max=4),
+            'shop_id'=>rand(1, 5),
             'type'=>$this->faker->randomElement($type),
         ];
     }
