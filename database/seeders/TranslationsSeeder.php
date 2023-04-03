@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Translation;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class TranslationsSeeder extends Seeder
 {
@@ -14,9 +15,12 @@ class TranslationsSeeder extends Seeder
      */
     public function run()
     {
-        $trans = Translation::create([
-            'shop_id' => rand(1, 5),
-            'trans'=>null
+        DB::table('translations')->insert([
+            array(
+                'shop_id' => rand(1, 5),
+                'trans'=>null
+            )
+           
         ]);
     }
 }

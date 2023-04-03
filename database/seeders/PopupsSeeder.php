@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Popup;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class PopupsSeeder extends Seeder
 {
@@ -14,11 +15,26 @@ class PopupsSeeder extends Seeder
      */
     public function run()
     {
-        $pop = Popup::create([
-            'type'=>rand($min = 0, $max = 2 ),	
-            'color'=>null,	
-            'style'=>null,	
-            'shop_id'=> rand($min = 1, $max = 5),	
+        DB::table('popups')->insert([
+            array(
+                'type'=>rand($min = 0, $max = 2 ),	
+                'color'=>null,	
+                'style'=>null,	
+                'shop_id'=> rand($min = 1, $max = 5),
+            ),
+            array(
+                'type'=>rand($min = 0, $max = 2 ),	
+                'color'=>null,	
+                'style'=>null,	
+                'shop_id'=> rand($min = 1, $max = 5),
+            ),
+            array(
+                'type'=>rand($min = 0, $max = 2 ),	
+                'color'=>null,	
+                'style'=>null,	
+                'shop_id'=> rand($min = 1, $max = 5),
+            )
+
         ]);
     }
 }
