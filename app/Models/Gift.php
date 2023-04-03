@@ -9,7 +9,7 @@ class Gift extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'shop_id',	'product_id',	'product_title',	'product_handel',	'product_image',	
+        'shop_id',	'product_id',	'product_title',	'product_handle',	'product_image',	
     ];
     public function shop()
     {

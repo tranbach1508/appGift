@@ -18,7 +18,7 @@ class CreateGoalsTable extends Migration
             $table->unsignedBigInteger('shop_id');
             $table->foreign('shop_id')->references('id')->on('shops');
             $table->tinyInteger('type');
-            $table->tinyInteger('status');
+            $table->tinyInteger('status')->default(1);
             $table->string('name', 250);
             $table->integer('gift_count');
             $table->integer('times');

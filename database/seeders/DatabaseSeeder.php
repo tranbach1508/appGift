@@ -10,7 +10,7 @@ use App\Models\Setting;
 use App\Models\Shop;
 use App\Models\Translation;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Request;
+
 
 
 class DatabaseSeeder extends Seeder
@@ -20,16 +20,22 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
-    public function run(Request $request)
+    public function run()
     {
         $this->call([
-           ShopsSeeder::class
+           ShopsSeeder::class,
+            ProgressBarsSeeder::class,
+            GoalsSeeder::class,
+            GiftsSeeder::class,
+            SettingsSeeder::class,
+            PopupsSeeder::class,
+            
         ]);
-        ProgressBar::factory(5)->create();
-        Goal::factory(5)->create();
-        Gift::factory(5)->create();
-        Setting::factory(5)->create();
-        Popup::factory(5)->create();
-        Translation::factory(5)->create();
+        // ProgressBar::factory()->count(5)->create();
+        // Goal::factory()->count(5)->create();
+        // Gift::factory()->count(5)->create();
+        // Setting::factory()->count(5)->create();
+        // Popup::factory()->count(5)->create();
+        // Translation::factory()->count(5)->create();
     }
 }

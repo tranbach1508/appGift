@@ -9,8 +9,8 @@ class Popup extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'type',	'
-        color',	
+        'type',	
+        'color',	
         'style',	
         'shop_id',	
     ];
