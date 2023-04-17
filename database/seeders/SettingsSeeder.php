@@ -20,7 +20,7 @@ class SettingsSeeder extends Seeder
             'status'=> rand(0,1),	
             'color'=>null,	
             'style'=>null,	
-            'shop_id'=> rand(1,5)
+            'shop_id'=> 1
         ),
        
         ]);

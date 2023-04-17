@@ -20,19 +20,7 @@ class PopupsSeeder extends Seeder
                 'type'=>rand($min = 0, $max = 2 ),	
                 'color'=>null,	
                 'style'=>null,	
-                'shop_id'=> rand($min = 1, $max = 5),
-            ),
-            array(
-                'type'=>rand($min = 0, $max = 2 ),	
-                'color'=>null,	
-                'style'=>null,	
-                'shop_id'=> rand($min = 1, $max = 5),
-            ),
-            array(
-                'type'=>rand($min = 0, $max = 2 ),	
-                'color'=>null,	
-                'style'=>null,	
-                'shop_id'=> rand($min = 1, $max = 5),
+                'shop_id'=> 1,
             )
 
         ]);

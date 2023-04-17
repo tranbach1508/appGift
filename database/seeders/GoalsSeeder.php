@@ -17,7 +17,7 @@ class GoalsSeeder extends Seeder
     {
         DB::table('goals')->insert([
             array(
-                'shop_id'=> rand(1, 5),	
+                'shop_id'=> 1,	
                 'type'=> 1,	
                 'status'=> 1,	
                 'name'=> 'FreeShipping',	

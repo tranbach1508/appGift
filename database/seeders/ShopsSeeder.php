@@ -19,30 +19,17 @@ class ShopsSeeder extends Seeder
     {
         DB::table('shops')->insert([
             array(
-                'url' => 'demoapp.shopify.com', 
-                'email' => 'jisoo.parisian@gmail.com',
-                'theme_id' => 1390456896379
+                'url' => 'tranbachdev.myshopify.com', 
+                'email' => 'tranbach2000@gmail.com',
+                'theme_id' => 1390456896379,
+                'token' => 'shpua_0713aee6a41a70d25b034f22f1c8057b'
             ),
             array(
                 'url' => 'hahahha.shopify.com', 
-            'email' => 'jennie.parisian@gmail.com',
-            'theme_id' => 1098476738203
-            ),
-            array(
-                'url' => 'semogift.shopify.com', 
-                    'email' => 'roses.parisian@gmail.com',
-                    'theme_id' => 1987463892947
-            ),
-            array(
-                'url' => 'basic.shopify.com', 
-                    'email' => 'lisa.parisian@gmail.com',
-                    'theme_id' => 134174689522
-            ),
-            array(
-                'url' => 'numberone.shopify.com', 
-            'email' => 'nguyenvana.parisian@gmail.com',
-            'theme_id' => 1389120908392
-            ),
+                'email' => 'jennie.parisian@gmail.com',
+                'theme_id' => 1098476738203,
+                'token' => ''
+            )
         ]);
        
     }

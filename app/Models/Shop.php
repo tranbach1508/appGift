@@ -12,5 +12,14 @@ class Shop extends Model
         'url',	
         'email',	
         'theme_id',
+        'token',
     ];
+    public static function install($info){
+        $shop = Shop::create($info);
+        return $shop;
+    }
+    public function getShopifyApi()
+    {
+        return \PHPShopify\ShopifySDK::config(['ShopUrl' => $this->url, 'AccessToken' => $this->token, 'ApiVersion' => config('constants.SHOPIFY_API_VERSION') ]);
+    }
 }

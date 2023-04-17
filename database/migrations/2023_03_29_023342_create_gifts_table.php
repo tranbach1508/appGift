@@ -17,7 +17,8 @@ class CreateGiftsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('shop_id');
             $table->foreign('shop_id')->references('id')->on('shops');
-            $table->integer('product_id');
+            $table->string('product_id',20);
+            $table->string('variant_id',20);
             $table->string('product_title',255);
             $table->string('product_handle',255);
             $table->string('product_image',255);

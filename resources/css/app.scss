@@ -1,0 +1,109 @@
+.mt-10{
+    margin-top: 10px;
+}
+.mb-10{
+    margin-bottom: 10px;
+}
+.center{
+    display: flex;
+    align-items: center;
+}
+.Polaris-TopBar__Contents {
+    justify-content: center !important;
+
+    .Polaris-TopBar__Custom {
+        .Polaris-TopBar__Menu {
+            display: flex;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            align-items: center;
+            list-style: none;
+            justify-content: center;
+
+            .Polaris-TopBar__Menu-Item {
+                position: relative;
+                display: flex;
+                height: 100%;
+                text-align: left;
+                list-style: none;
+
+                a {
+                    text-decoration: none;
+                    display: flex;
+                    padding: 8px 15px;
+                    font-weight: 500;
+                    border-radius: 3px;
+                    align-items: center;
+                    cursor: pointer;
+                    color: var(--p-text);
+                }
+
+                .Menu-Item-Right {
+                    margin-left: 5px;
+                }
+
+                &.Menu-Item-Selected {
+                    &>a {
+                        background: rgba(237, 238, 239, 1);
+                        color: rgba(0, 128, 96, 1);
+                    }
+                }
+            }
+        }
+    }
+}
+
+#page-gifts {
+    .Polaris-Inline-Item {
+        display: flex;
+        justify-content: space-between;
+    }
+    .Polaris-AlphaStack{
+        img{
+            opacity: 0.5;
+            max-width: 100px;
+        }
+    }
+    .select-gift-product-section{
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .select-gift-product-section{
+            &__image{
+                width: 100px;
+                height: 100px;
+                border: 1px solid rgba(225, 227, 229, 1);
+                border-radius: 0.25rem;
+                display: flex;
+                align-items: center;    
+                img{
+                    width: 100%;
+                    max-width: 100%;
+                }
+            }
+            &__title{
+                margin: 10px 0;
+            }
+            &__placeholder{
+                margin: 10px 0;
+            }
+        }
+        &.not-selected{
+            .select-gift-product-section__image{
+                border: none;
+                opacity: 0.5;
+            }
+        }
+    }
+    .Polaris-FormLayout__Items{
+        margin-left: -1.25rem;
+    }
+    .Polaris-FormLayout__Item{
+        .Polaris-ButtonGroup{
+            margin-top: 40px;
+            justify-content: center;
+        }
+    }
+}
