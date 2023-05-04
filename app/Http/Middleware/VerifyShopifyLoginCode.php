@@ -9,7 +9,6 @@ use App\Jobs\ShopUpdateInfor;
 use Log;
 use Session;
 use App\Http\Requests;
-use Illuminate\Http\Request;
 
 class VerifyShopifyLoginCode
 {
@@ -29,6 +28,7 @@ class VerifyShopifyLoginCode
             'SharedSecret' => config('constants.SHOPIFY_SECRET'),
         );
         \PHPShopify\ShopifySDK::config($config);
+        
         if($request->has('session') && !empty(Shop::where('url', $request_shop)->first())){
             $isValidRequest = \PHPShopify\AuthHelper::verifyShopifyRequest();
             if($isValidRequest){

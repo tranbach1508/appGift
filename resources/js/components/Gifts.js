@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { ResourcePicker } from '@shopify/app-bridge-react';
-import { Page, LegacyCard, ResourceList, ResourceItem, Thumbnail, Text, ButtonGroup, Button, Form, FormLayout, TextField, Select } from '@shopify/polaris';
+import { Page, LegacyCard, ResourceList, ResourceItem, Thumbnail, Text, ButtonGroup, Button, Form, FormLayout, TextField, Select, Toast } from '@shopify/polaris';
 import callapi from './CallApi';
 
 const Gifts = () => {
@@ -10,13 +10,35 @@ const Gifts = () => {
     })
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [selectedVariant, setSelectedVariant] = useState(null);
-    const gifts = [
-        {
-            thumb: 'https://cdn.shopify.com/s/files/1/0655/6096/9461/products/Asset24_2x-281633-837784_f9362dd0-d65a-4e65-bafb-f79936ff832f.png?v=1679296752',
-            title: 'Free Bike Box (Packaging Materials)',
-            variant: 'Default'
+    const [gifts, setGifts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        fetchGifts();
+    }, []);
+    const fetchGifts = async () => {
+        
+        try {
+            const response = await fetch(window.App.appUrl + '/api/addGift');
+            if (!response.ok) {
+                throw response;
+            }
+            const data = await response.json();
+            setGifts(data);
+           
+        } catch (error) {
+            setError(error);
+        } finally {
+            setLoading(false);
         }
-    ]
+    };
+    
+    const deleteGift = (id) => {
+
+    };
+
+
     const openProductModal = () => {
         changeState('pickerOpen', true)
     }
@@ -45,7 +67,7 @@ const Gifts = () => {
         setSelectedProduct(product)
         changeState('pickerOpen', false)
     }
-    const changeGiftTitle = (value) =>{
+    const changeGiftTitle = (value) => {
         setSelectedProduct({
             ...selectedProduct,
             ['title']: value
@@ -53,21 +75,24 @@ const Gifts = () => {
     }
     const addGift = () => {
         let data = selectedProduct;
-        if(selectedVariant == null){
+        if (selectedVariant == null) {
             data.variant_id = null
-        }else{
+        } else {
             data.variant_id = data.variants.find(x => x.value == selectedVariant).value;
         }
         callapi(window.App.appUrl + '/api/addGift', data)
             .then((response) => {
+                console.log("successfully");
             })
     }
-
+    const [active, setActive] = useState(false);
+    const toggleActive = useCallback(() => setActive((active) => !active), []);
+    const toastMarkup = active ? (
+        <Toast content="Successfully" onDismiss={toggleActive} />
+    ) : null;
     return (
         <div id="page-gifts">
-            <Page
-                title="Create and Manage Gifts"
-            >
+            <Page title="Create and Manage Gifts">
                 <ResourcePicker
                     open={myState.pickerOpen}
                     resourceType="Product"
@@ -87,40 +112,45 @@ const Gifts = () => {
                             </div>
                             {selectedProduct != null ?
                                 <div className='select-gift-product-section__title'>
-                                    <Text variant="headingLg" as="h5">
+                                    <Text variant="headingLg" as="h5" >
                                         {selectedProduct != null ? selectedProduct.title : ''}
                                     </Text>
                                 </div> :
                                 <div className='select-gift-product-section__placeholder'>
                                     <Text as="span" color="subdued">Select a product to create a gift.</Text>
-                                </div>}
+                                </div>
+                            }
                             <div className='select-gift-product-section__action'>
                                 <Button onClick={openProductModal} primary>{selectedProduct == null ? 'Select a Product' : 'Select another Product'}</Button>
                             </div>
                         </div>
                     </LegacyCard.Section>
                     {selectedProduct ?
-                        <LegacyCard.Section title="Custom Gift">
-                            <FormLayout.Group>
-                                <TextField
-                                    label="The gift title"
-                                    value={selectedProduct.title}
-                                    onChange={(value) => changeGiftTitle(value)}
-                                    autoComplete="off"
-                                />
-                                <Select
-                                    label="Select a Variant"
-                                    options={selectedProduct.variants}
-                                    onChange={(value) => setSelectedVariant(value)}
-                                    value={selectedVariant == null ? selectedProduct.variants[0] : selectedVariant}
-                                />
-                            </FormLayout.Group>
-                            <FormLayout>
-                                <ButtonGroup>
-                                    {selectedProduct ? <Button onClick={() => setSelectedProduct(null)}>Cancel</Button> : ''}
-                                    <Button primary onClick={addGift}>Create Gift</Button>
-                                </ButtonGroup>
-                            </FormLayout>
+                        <LegacyCard.Section title="Custom Gift" >
+                            <Form onSubmit={addGift}>
+                                <FormLayout.Group >
+                                    <TextField
+                                        label="The gift title" name='title'
+                                        value={selectedProduct.title}
+                                        onChange={(value) => changeGiftTitle(value)}
+                                        autoComplete="off"
+                                    />
+                                    <Select
+                                        label="Select a Variant" name='variant'
+                                        options={selectedProduct.variants}
+                                        onChange={(value) => setSelectedVariant(value)}
+                                        value={selectedVariant == null ? selectedProduct.variants[0] : selectedVariant}
+                                    />
+                                </FormLayout.Group>
+                                <FormLayout>
+                                    <ButtonGroup>
+                                        {selectedProduct ? <Button onClick={() => setSelectedProduct(null)}>Cancel</Button> : ''}
+                                        <Button primary onClick={toggleActive}
+                                            submit>Create Gift</Button>
+                                        {toastMarkup}
+                                    </ButtonGroup>
+                                </FormLayout>
+                            </Form>
                         </LegacyCard.Section> : null}
                 </LegacyCard>
                 <LegacyCard title="Gift Products You've Created:">
@@ -129,14 +159,15 @@ const Gifts = () => {
                             resourceName={{ singular: 'customer', plural: 'customers' }}
                             items={gifts}
                             renderItem={(item) => {
-                                const { thumb, title, variant } = item;
+                                const { id, thumb, title, variant } = item;
                                 const media = <Thumbnail source={thumb} alt={title} size="small" />;
-
                                 return (
                                     <ResourceItem
+                                        id={id}
                                         media={media}
                                         accessibilityLabel={`View details for ${thumb}`}
                                     >
+
                                         <div className='Polaris-Inline-Item'>
                                             <div className='Polaris-Inline-Title'>
                                                 <Text variant="bodyMd" fontWeight="bold" as="h3">
@@ -147,7 +178,7 @@ const Gifts = () => {
                                             <div className='Polaris-Inline-Action'>
                                                 <ButtonGroup>
                                                     <Button size="slim">Edit</Button>
-                                                    <Button size="slim" destructive>Delete</Button>
+                                                    <Button onClick={() => deleteGift(id)} type="button" size="slim" destructive >Delete</Button>
                                                 </ButtonGroup>
                                             </div>
                                         </div>

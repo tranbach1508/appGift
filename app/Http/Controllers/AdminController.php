@@ -19,5 +19,6 @@ class AdminController extends Controller
             return view('login');
         }
         return view('index')->withShopUrl($shop->url);
+       
     }
 }
