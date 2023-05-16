@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GiftController;
 
 /*
@@ -26,5 +27,7 @@ Route::group(['prefix' => 'admin','middleware' => ['iframeProtection','verifySho
 
 // Gift
 Route::group(['prefix' => 'api','middleware' => ['iframeProtection','verifySessionToken']], function () {
+   
     Route::post('/addGift',                [GiftController::class, 'addGift']);
+    Route::post('/sendEmail',               [ContactController::class, 'sendEmail']);
 });
