@@ -31,7 +31,7 @@ const App = () => {
         },
         {
             label: 'Goals',
-            destination: '/admin/goals',
+            destination: '/admin/goal-types',
         },
         {
             label: 'Progress Bar',

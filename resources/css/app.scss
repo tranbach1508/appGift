@@ -49,6 +49,28 @@
                         color: rgba(0, 128, 96, 1);
                     }
                 }
+                .Polaris-TopBar__Submenu{
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    display: none;
+                    padding: 8px;
+                    min-width: 220px;
+                    height: auto;
+                    align-items: start;
+                    border-radius: 3px;
+                    background-color: #fff;
+                    box-shadow: 0 0 5px rgb(23 24 24 / 5%), 0 1px 2px rgb(0 0 0 / 15%);
+                    outline: 1px solid transparent;
+                    a{
+                        padding: 8px;
+                    }
+                }
+                &:hover{
+                    .Polaris-TopBar__Submenu{
+                        display: block !important;
+                    }
+                }
             }
         }
     }

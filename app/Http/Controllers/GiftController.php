@@ -16,27 +16,44 @@ class GiftController extends Controller
         $gift['title'] = $request->get('title');
         $variant_index = array_search($request->get('variant_id'), array_column($product['variants'], 'id'));
         $gift['variants'] = [];
-        $variant = $product['variants'][$variant_index];
+        if(empty($request->get('variant_id'))){
+            $variant = $product['variants'][0];
+        }else{
+            $variant = $product['variants'][$variant_index];
+        }
         $variant['price'] = 0;
         $gift['variants'][] = $variant;
-        $shopifyApi->Product->post($gift);
+        $new_product = $shopifyApi->Product->post($gift);
 
         Gift::create([
             'shop_id' => $shop->id,
-            'product_id'=> $request->id,
+            'product_id'=> $new_product['id'],
             'product_title'=> $request->title,
-            'variant_id' => $request->variant_id,
-            'product_handle'=> $request->title,
+            'variant_id' => $variant['id'],
+            'variant_title' => $variant['title'],
+            'product_handle'=> $new_product['handle'],
             'product_image'=>$request->image,
         ]);
-        // dd($request->all());
-        return response()-> json("successfully created");
-       
+        return response()-> json([
+            'status' => true
+        ]);
+    }
+
+    public function gifts(Request $request){
+        $shop = $request->get('shop');
+        $gifts = Gift::where('shop_id',$shop->id)->get();
+        return response()-> json($gifts);
     }
    
-    public function destroy($id)
+    public function deleteGift(Request $request)
     {
-         Gift::find($id)->delete();
-        return response()->json("Successfully deleted");
+        $shop = $request->get('shop');
+        $gift = Gift::where('product_id',$request->product_id)->first();
+        $gift->delete();
+        $shopifyApi = $shop->getShopifyApi();
+        $product = $shopifyApi->Product($request->product_id)->delete();
+        return response()-> json([
+            'status' => true
+        ]);
     }
 }   

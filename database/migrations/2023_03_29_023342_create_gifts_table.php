@@ -20,6 +20,7 @@ class CreateGiftsTable extends Migration
             $table->string('product_id',20);
             $table->string('variant_id',20);
             $table->string('product_title',255);
+            $table->string('variant_title',255);
             $table->string('product_handle',255);
             $table->string('product_image',255);
             $table->timestamps();

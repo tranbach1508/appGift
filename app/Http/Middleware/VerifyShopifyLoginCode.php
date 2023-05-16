@@ -9,6 +9,7 @@ use App\Jobs\ShopUpdateInfor;
 use Log;
 use Session;
 use App\Http\Requests;
+use Illuminate\Http\Request;
 
 class VerifyShopifyLoginCode
 {
@@ -28,7 +29,6 @@ class VerifyShopifyLoginCode
             'SharedSecret' => config('constants.SHOPIFY_SECRET'),
         );
         \PHPShopify\ShopifySDK::config($config);
-        
         if($request->has('session') && !empty(Shop::where('url', $request_shop)->first())){
             $isValidRequest = \PHPShopify\AuthHelper::verifyShopifyRequest();
             if($isValidRequest){
@@ -79,8 +79,8 @@ class VerifyShopifyLoginCode
             if(!preg_match('/^[a-zA-Z0-9\-]+.myshopify.com$/', $request_shop)){
                 return response(view('login'));
             };
-            $redirectURL = 'http://127.0.0.1:8000/authorize';
-            $installURL = \PHPShopify\AuthHelper::createAuthRequest(config('constants.SHOPIFY_SCOPE'), $redirectURL);
+            $redirectURL = 'http://localhost:8000/authorize';
+            $installURL = \PHPShopify\AuthHelper::createAuthRequest(config('constants.SHOPIFY_SCOPE'), $redirectURL, null, null, true);
             die("<script>top.location.href='$installURL'</script>");
             exit;
         }

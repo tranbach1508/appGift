@@ -27,4 +27,6 @@ Route::group(['prefix' => 'admin','middleware' => ['iframeProtection','verifySho
 // Gift
 Route::group(['prefix' => 'api','middleware' => ['iframeProtection','verifySessionToken']], function () {
     Route::post('/addGift',                [GiftController::class, 'addGift']);
+    Route::post('/gifts',                [GiftController::class, 'gifts']);
+    Route::post('/deleteGift',                [GiftController::class, 'deleteGift']);
 });

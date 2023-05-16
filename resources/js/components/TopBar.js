@@ -1,7 +1,7 @@
 import React from 'react';
 import { Icon } from '@shopify/polaris';
-import { GiftCardMajor, StoreStatusMajor, BuyButtonButtonLayoutMajor, SettingsMajor, PackageMajor, EmailMajor } from '@shopify/polaris-icons';
-import {useNavigate} from 'react-router-dom';
+import { GiftCardMajor, StoreStatusMajor, BuyButtonButtonLayoutMajor, SettingsMajor, PackageMajor, EmailMajor,ShipmentMajor,DiscountsMajor } from '@shopify/polaris-icons';
+import { useNavigate } from 'react-router-dom';
 
 const TopBar = ({ location }) => {
     const navigate = useNavigate();
@@ -9,32 +9,54 @@ const TopBar = ({ location }) => {
         {
             url: '/admin/gifts',
             icon: GiftCardMajor,
-            label: "Gifts"
+            label: "Gifts",
+            submenu: null
         },
         {
             url: '/admin/goals',
             icon: StoreStatusMajor,
-            label: "Goals"
+            label: "Goals",
+            submenu: [
+                {
+                    url: '/admin/free-gift',
+                    icon: GiftCardMajor,
+                    label: "Free Gift Goals"
+                },
+                {
+                    url: '/admin/free-shipping',
+                    icon: ShipmentMajor,
+                    label: "Free Shipping Goals"
+                },
+                {
+                    url: '/admin/discount',
+                    icon: DiscountsMajor,
+                    label: "Discount Code Goals"
+                }
+            ]
         },
         {
             url: '/admin/progress-bar',
             icon: BuyButtonButtonLayoutMajor,
-            label: "Progress Bar"
+            label: "Progress Bar",
+            submenu: null
         },
         {
             url: '/admin/recommend-popup',
             icon: PackageMajor,
-            label: "Recommend Popup"
+            label: "Recommend Popup",
+            submenu: null
         },
         {
             url: '/admin/settings',
             icon: SettingsMajor,
-            label: "Settings"
+            label: "Settings",
+            submenu: null
         },
         {
             url: '/admin/contact',
             icon: EmailMajor,
-            label: "Contact"
+            label: "Contact",
+            submenu: null
         }
     ]
     const changePage = (url) => {
@@ -63,7 +85,24 @@ const TopBar = ({ location }) => {
                                         source={item.icon}
                                     />
                                     <span className="Menu-Item-Title Menu-Item-Right">{item.label}</span>
+                                    {item.submenu != null ?
+                                    <span className="Menu-Item-Icon Menu-Item-Right"><span className="Polaris-Icon Polaris-Icon--newDesignLanguage"><svg viewBox="0 0 20 20" className="Polaris-Icon__Svg" focusable="false" aria-hidden="true"><path d="M13.098 8h-6.196c-.751 0-1.172.754-.708 1.268l3.098 3.432c.36.399 1.055.399 1.416 0l3.098-3.433c.464-.513.043-1.267-.708-1.267Z" /></svg></span></span>
+                                    : ''}
                                 </a>
+                                {item.submenu != null ?
+                                    <ul className="Polaris-TopBar__Submenu">
+                                        {item.submenu.map((submenu) => (
+                                            <li className="Polaris-TopBar__Menu-Item Submenu-Item ">
+                                                <a>
+                                                    <Icon
+                                                        source={submenu.icon}
+                                                    />
+                                                    <span className="Menu-Item-Title Menu-Item-Right">{submenu.label}</span>
+                                                </a>
+                                            </li>
+                                        ))}
+                                    </ul> : ''
+                                }
                             </li>
                         )
                         )}

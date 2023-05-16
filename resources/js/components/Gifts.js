@@ -7,35 +7,42 @@ const Gifts = () => {
     const [myState, setMyState] = useState({
         productModalIsShowed: false,
         pickerOpen: false,
+        giftPending: false
+    });
+    const [toast,setToast] = useState({
+        message: '',
+        active: false,
+        error: false
     })
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [selectedVariant, setSelectedVariant] = useState(null);
     const [gifts, setGifts] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const toggleActive = useCallback(() => {
+        setToast(!toast.active);
+    }, []);
+    const toastMarkup = toast.active ? (
+        <Toast error={toast.error} content={toast.message} onDismiss={toggleActive} />
+    ) : null;
 
     useEffect(() => {
         fetchGifts();
     }, []);
     const fetchGifts = async () => {
-        
-        try {
-            const response = await fetch(window.App.appUrl + '/api/addGift');
-            if (!response.ok) {
-                throw response;
-            }
-            const data = await response.json();
-            setGifts(data);
-           
-        } catch (error) {
-            setError(error);
-        } finally {
-            setLoading(false);
-        }
+        callapi(window.App.appUrl + '/api/gifts')
+            .then((response) => {
+                setGifts(response.data);
+            })
     };
     
-    const deleteGift = (id) => {
-
+    const deleteGift = (product_id) => {
+        callapi(window.App.appUrl + '/api/deleteGift', {
+            product_id: product_id
+        })
+        .then((response) => {
+            if(response.data.status){
+                fetchGifts();
+            }
+        })
     };
 
 
@@ -74,6 +81,7 @@ const Gifts = () => {
         })
     }
     const addGift = () => {
+        changeState('giftPending',true)
         let data = selectedProduct;
         if (selectedVariant == null) {
             data.variant_id = null
@@ -81,15 +89,28 @@ const Gifts = () => {
             data.variant_id = data.variants.find(x => x.value == selectedVariant).value;
         }
         callapi(window.App.appUrl + '/api/addGift', data)
-            .then((response) => {
-                console.log("successfully");
-            })
+        .then((response) => {
+            if(response.data.status){
+                setToast({
+                    message: 'Create gift successful',
+                    active: true,
+                    error: false
+                })
+                // Clear gift selected
+                setSelectedProduct(null);
+                fetchGifts();
+                changeState('giftPending',false)
+            }else{
+                setToast({
+                    message: 'Create gift not successful',
+                    active: true,
+                    error: true
+                })
+                changeState('giftPending',false)
+            }
+        })
     }
-    const [active, setActive] = useState(false);
-    const toggleActive = useCallback(() => setActive((active) => !active), []);
-    const toastMarkup = active ? (
-        <Toast content="Successfully" onDismiss={toggleActive} />
-    ) : null;
+
     return (
         <div id="page-gifts">
             <Page title="Create and Manage Gifts">
@@ -145,7 +166,7 @@ const Gifts = () => {
                                 <FormLayout>
                                     <ButtonGroup>
                                         {selectedProduct ? <Button onClick={() => setSelectedProduct(null)}>Cancel</Button> : ''}
-                                        <Button primary onClick={toggleActive}
+                                        <Button primary disabled={myState.giftPending} loading={myState.giftPending}
                                             submit>Create Gift</Button>
                                         {toastMarkup}
                                     </ButtonGroup>
@@ -159,26 +180,25 @@ const Gifts = () => {
                             resourceName={{ singular: 'customer', plural: 'customers' }}
                             items={gifts}
                             renderItem={(item) => {
-                                const { id, thumb, title, variant } = item;
-                                const media = <Thumbnail source={thumb} alt={title} size="small" />;
+                                const { id, product_id,product_image, product_title, variant_title } = item;
+                                const media = <Thumbnail source={product_image} alt={product_title} size="small" />;
                                 return (
                                     <ResourceItem
                                         id={id}
                                         media={media}
-                                        accessibilityLabel={`View details for ${thumb}`}
+                                        accessibilityLabel={`View details for ${product_image}`}
                                     >
 
                                         <div className='Polaris-Inline-Item'>
                                             <div className='Polaris-Inline-Title'>
                                                 <Text variant="bodyMd" fontWeight="bold" as="h3">
-                                                    {title}
+                                                    {product_title}
                                                 </Text>
-                                                <div>{variant}</div>
+                                                <div>{variant_title}</div>
                                             </div>
                                             <div className='Polaris-Inline-Action'>
                                                 <ButtonGroup>
-                                                    <Button size="slim">Edit</Button>
-                                                    <Button onClick={() => deleteGift(id)} type="button" size="slim" destructive >Delete</Button>
+                                                    <Button onClick={() => deleteGift(product_id)} type="button" size="slim" destructive >Delete</Button>
                                                 </ButtonGroup>
                                             </div>
                                         </div>

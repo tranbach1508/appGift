@@ -4,6 +4,7 @@ import {
     Route
 } from "react-router-dom";
 import Dashboard from "./Dashboard";
+import GoalTypes from "./GoalTypes";
 import Gifts from "./Gifts";
 import Goals from "./Goals";
 import ProgressBar from './ProgressBar';
@@ -16,7 +17,7 @@ const Routers = () => {
         <Suspense fallback={<div>Loading...</div>}>
             <Routes>
                 <Route exact path="/" element={<Gifts/>} />
-                <Route path="/admin/gifts" element={<Gifts/>} />
+                <Route path="/admin/goal-types" element={<GoalTypes/>} />
                 <Route path="/admin/goals" element={<Goals/>} />
                 <Route path="/admin/progress-bar" element={<ProgressBar/>} />
                 <Route path="/admin/recommend-popup" element={<RecommendPopup/>} />
