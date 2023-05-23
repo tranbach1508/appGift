@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Mail;
 
 class Shop extends Model
@@ -23,7 +25,7 @@ class Shop extends Model
     {
         return \PHPShopify\ShopifySDK::config(['ShopUrl' => $this->url, 'AccessToken' => $this->token, 'ApiVersion' => config('constants.SHOPIFY_API_VERSION') ]);
     }
-    public function sendMailApi($emailData)
+    public function sendMailApi( $emailData)
     {
         
         Mail::send([], [], function ($message) use ($emailData) {
@@ -31,7 +33,7 @@ class Shop extends Model
                 ->from($emailData['from']['email'], $emailData['from']['name'])
                 ->replyTo($emailData['reply_to'])
                 ->subject($emailData['subject'])
-                ->setBody($emailData['content'][0]['value'], 'text/html');
+                ->setBody(view('Mail.SendEmail',$emailData)->render(), 'text/html');
         });
     }
 }

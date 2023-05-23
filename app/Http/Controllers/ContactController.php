@@ -11,8 +11,8 @@ class ContactController extends Controller
 {
     public function isWeekend($date)
     {
-        $carbonDate = Carbon::parse($date);
-        return $carbonDate->isWeekend();
+        $weekDay = date('w', strtotime($date));
+        return ($weekDay == 0 || $weekDay == 6);
     }
     public function sendEmail(Request $request)
     {
@@ -32,34 +32,38 @@ class ContactController extends Controller
                 ],
                 'reply_to' => $request->input('email'),
                 'subject' => $request->input('subject') . ' - ' . $shop->url,
-                'content' => [
-                    [
-                        'type' => 'html',
-                        'value' => '<div style="background: #f9f9f9; padding: 20px 10px;">
-                        <div style="max-width: 600px; margin: auto; padding: 15px 30px 25px 30px; background-color: #ffffff; border-radius: 3px; border-bottom: 1px solid #dadada; border-top: 1px solid #eaeaea;">
-                        <table style="width: 100%; color: #000; border: 1px solid black; border-collapse: collapse; font-weight: 500;">
-                        <tbody>
-                        <tr>
-                        <td style="border: 1px solid black; padding: 10px; width: 120px;">Shop url</td>
-                        <td style="border: 1px solid black; padding: 10px;">' . $shop->url . '</td>
-                        </tr>
-                        <tr>
-                        <td style="border: 1px solid black; padding: 10px; width: 120px;">Name</td>
-                        <td style="border: 1px solid black; padding: 10px;">' . $request->name . '</td>
-                        </tr>
-                        <tr>
-                        <td style="border: 1px solid black; padding: 10px; width: 120px;">Email</td>
-                        <td style="border: 1px solid black; padding: 10px;">' . $request->email . '</td>
-                        </tr>
-                        <tr>
-                        <td style="border: 1px solid black; padding: 10px; width: 120px;">Content</td>
-                        <td style="border: 1px solid black; padding: 10px;">' . $request->content . '</td>
-                        </tr>
-                        </tbody>
-                        </table>
-                        </div>'
-                    ]
-                ]
+                'shop' => $shop->url,
+                'name'=> $request->name,
+                'email'=> $request->email,
+                'message'=> $request->content
+                // 'content' => [
+                //     [
+                //         'type' => 'html',
+                //         'value' => '<div style="background: #f9f9f9; padding: 20px 10px;">
+                //         <div style="max-width: 600px; margin: auto; padding: 15px 30px 25px 30px; background-color: #ffffff; border-radius: 3px; border-bottom: 1px solid #dadada; border-top: 1px solid #eaeaea;">
+                //         <table style="width: 100%; color: #000; border: 1px solid black; border-collapse: collapse; font-weight: 500;">
+                //         <tbody>
+                //         <tr>
+                //         <td style="border: 1px solid black; padding: 10px; width: 120px;">Shop url</td>
+                //         <td style="border: 1px solid black; padding: 10px;">' . $shop->url . '</td>
+                //         </tr>
+                //         <tr>
+                //         <td style="border: 1px solid black; padding: 10px; width: 120px;">Name</td>
+                //         <td style="border: 1px solid black; padding: 10px;">' . $request->name . '</td>
+                //         </tr>
+                //         <tr>
+                //         <td style="border: 1px solid black; padding: 10px; width: 120px;">Email</td>
+                //         <td style="border: 1px solid black; padding: 10px;">' . $request->email . '</td>
+                //         </tr>
+                //         <tr>
+                //         <td style="border: 1px solid black; padding: 10px; width: 120px;">Content</td>
+                //         <td style="border: 1px solid black; padding: 10px;">' . $request->content . '</td>
+                //         </tr>
+                //         </tbody>
+                //         </table>
+                //         </div>'
+                //     ]
+                // ]
             ];
 
             if (!empty($request->input('email')) && filter_var($request->input('email'), FILTER_VALIDATE_EMAIL)) {

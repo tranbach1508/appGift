@@ -1,7 +1,7 @@
 import { Banner, Button, Form, FormLayout, LegacyCard, Page, TextField } from '@shopify/polaris';
 import React, { useState, useCallback, useEffect} from 'react';
 
-import _axiosApiInstance from './axiosApiInstance';
+import callapi from './CallApi';
 
 
 const Contact = () => {
@@ -11,7 +11,7 @@ const Contact = () => {
         subject: '',
         content: '',
     });
-
+    
     const handleNameChange = useCallback((value) => setValues(prevValues => ({ ...prevValues, name: value })), []);
     const handleEmailChange = useCallback((value) => setValues(prevValues => ({ ...prevValues, email: value })), []);
     const handleSubjectChange = useCallback((value) => setValues(prevValues => ({ ...prevValues, subject: value })), []);
@@ -28,7 +28,7 @@ const Contact = () => {
             content: values.content
         };
 
-        _axiosApiInstance.post("http://localhost:8000/api/sendEmail", data)
+        callapi(window.App.appUrl + '/api/sendEmail', data)
             .then((response) => {
                 console.log(response);
                 setValues({
@@ -101,7 +101,7 @@ const Contact = () => {
                                     type="text" label="Content (*)" value={values.content} onChange={handleContentChange}
                                     autoComplete="off" multiline={4}
                                 />
-                                <Button primary submit disabled={values.name === "" || values.email === "" || values.subject === "" || values.content === ""}>
+                                <Button primary submit disabled={values.name === "" || values.email === "" || values.subject === "" || values.content === ""} >
                                     Send
                                 </Button>
                             </FormLayout>

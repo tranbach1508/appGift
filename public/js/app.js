@@ -34408,7 +34408,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shopify_polaris__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @shopify/polaris */ "./node_modules/@shopify/polaris/build/esm/components/Button/Button.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _axiosApiInstance__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./axiosApiInstance */ "./resources/js/components/axiosApiInstance.js");
+/* harmony import */ var _CallApi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CallApi */ "./resources/js/components/CallApi.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -34473,7 +34473,7 @@ var Contact = function Contact() {
       subject: values.subject,
       content: values.content
     };
-    _axiosApiInstance__WEBPACK_IMPORTED_MODULE_1__["default"].post("http://localhost:8000/api/sendEmail", data).then(function (response) {
+    (0,_CallApi__WEBPACK_IMPORTED_MODULE_1__["default"])(window.App.appUrl + '/api/sendEmail', data).then(function (response) {
       console.log(response);
       setValues({
         name: '',
