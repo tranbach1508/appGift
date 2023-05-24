@@ -18319,6 +18319,291 @@ function getDefaultAccessibilityLabel(i18n, progress, status) {
 
 /***/ }),
 
+/***/ "./node_modules/@shopify/polaris/build/esm/components/Banner/Banner.js":
+/*!*****************************************************************************!*\
+  !*** ./node_modules/@shopify/polaris/build/esm/components/Banner/Banner.js ***!
+  \*****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Banner": () => (/* binding */ Banner)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _shopify_polaris_icons__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @shopify/polaris-icons */ "./node_modules/@shopify/polaris-icons/dist/icons/CancelSmallMinor.svg.mjs");
+/* harmony import */ var _shopify_polaris_icons__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @shopify/polaris-icons */ "./node_modules/@shopify/polaris-icons/dist/icons/CircleTickMajor.svg.mjs");
+/* harmony import */ var _shopify_polaris_icons__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @shopify/polaris-icons */ "./node_modules/@shopify/polaris-icons/dist/icons/CircleInformationMajor.svg.mjs");
+/* harmony import */ var _shopify_polaris_icons__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @shopify/polaris-icons */ "./node_modules/@shopify/polaris-icons/dist/icons/CircleAlertMajor.svg.mjs");
+/* harmony import */ var _shopify_polaris_icons__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @shopify/polaris-icons */ "./node_modules/@shopify/polaris-icons/dist/icons/DiamondAlertMajor.svg.mjs");
+/* harmony import */ var _utilities_css_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utilities/css.js */ "./node_modules/@shopify/polaris/build/esm/utilities/css.js");
+/* harmony import */ var _utilities_banner_context_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../utilities/banner-context.js */ "./node_modules/@shopify/polaris/build/esm/utilities/banner-context.js");
+/* harmony import */ var _utilities_within_content_context_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utilities/within-content-context.js */ "./node_modules/@shopify/polaris/build/esm/utilities/within-content-context.js");
+/* harmony import */ var _Banner_scss_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Banner.scss.js */ "./node_modules/@shopify/polaris/build/esm/components/Banner/Banner.scss.js");
+/* harmony import */ var _UnstyledButton_utils_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../UnstyledButton/utils.js */ "./node_modules/@shopify/polaris/build/esm/components/UnstyledButton/utils.js");
+/* harmony import */ var _utilities_i18n_hooks_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utilities/i18n/hooks.js */ "./node_modules/@shopify/polaris/build/esm/utilities/i18n/hooks.js");
+/* harmony import */ var _Spinner_Spinner_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Spinner/Spinner.js */ "./node_modules/@shopify/polaris/build/esm/components/Spinner/Spinner.js");
+/* harmony import */ var _Box_Box_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../Box/Box.js */ "./node_modules/@shopify/polaris/build/esm/components/Box/Box.js");
+/* harmony import */ var _Button_Button_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../Button/Button.js */ "./node_modules/@shopify/polaris/build/esm/components/Button/Button.js");
+/* harmony import */ var _Icon_Icon_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../Icon/Icon.js */ "./node_modules/@shopify/polaris/build/esm/components/Icon/Icon.js");
+/* harmony import */ var _Text_Text_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Text/Text.js */ "./node_modules/@shopify/polaris/build/esm/components/Text/Text.js");
+/* harmony import */ var _ButtonGroup_ButtonGroup_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../ButtonGroup/ButtonGroup.js */ "./node_modules/@shopify/polaris/build/esm/components/ButtonGroup/ButtonGroup.js");
+/* harmony import */ var _UnstyledLink_UnstyledLink_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../UnstyledLink/UnstyledLink.js */ "./node_modules/@shopify/polaris/build/esm/components/UnstyledLink/UnstyledLink.js");
+/* harmony import */ var _UnstyledButton_UnstyledButton_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../UnstyledButton/UnstyledButton.js */ "./node_modules/@shopify/polaris/build/esm/components/UnstyledButton/UnstyledButton.js");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const Banner = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.forwardRef)(function Banner({
+  icon,
+  action,
+  secondaryAction,
+  title,
+  children,
+  status,
+  onDismiss,
+  stopAnnouncements,
+  hideIcon
+}, bannerRef) {
+  const withinContentContainer = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_utilities_within_content_context_js__WEBPACK_IMPORTED_MODULE_1__.WithinContentContext);
+  const i18n = (0,_utilities_i18n_hooks_js__WEBPACK_IMPORTED_MODULE_2__.useI18n)();
+  const {
+    wrapperRef,
+    handleKeyUp,
+    handleBlur,
+    handleMouseUp,
+    shouldShowFocus
+  } = useBannerFocus(bannerRef);
+  const {
+    defaultIcon,
+    iconColor,
+    ariaRoleType
+  } = useBannerAttributes(status);
+  const iconName = icon || defaultIcon;
+  const className = (0,_utilities_css_js__WEBPACK_IMPORTED_MODULE_3__.classNames)(_Banner_scss_js__WEBPACK_IMPORTED_MODULE_4__["default"].Banner, status && _Banner_scss_js__WEBPACK_IMPORTED_MODULE_4__["default"][(0,_utilities_css_js__WEBPACK_IMPORTED_MODULE_3__.variationName)('status', status)], onDismiss && _Banner_scss_js__WEBPACK_IMPORTED_MODULE_4__["default"].hasDismiss, shouldShowFocus && _Banner_scss_js__WEBPACK_IMPORTED_MODULE_4__["default"].keyFocused, withinContentContainer ? _Banner_scss_js__WEBPACK_IMPORTED_MODULE_4__["default"].withinContentContainer : _Banner_scss_js__WEBPACK_IMPORTED_MODULE_4__["default"].withinPage);
+  let headingMarkup = null;
+
+  if (title) {
+    headingMarkup = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Text_Text_js__WEBPACK_IMPORTED_MODULE_5__.Text, {
+      as: "h2",
+      variant: "headingMd",
+      breakWord: true
+    }, title);
+  }
+
+  const spinnerMarkup = action !== null && action !== void 0 && action.loading ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    disabled: true,
+    "aria-busy": true,
+    className: (0,_utilities_css_js__WEBPACK_IMPORTED_MODULE_3__.classNames)(_Banner_scss_js__WEBPACK_IMPORTED_MODULE_4__["default"].Button, _Banner_scss_js__WEBPACK_IMPORTED_MODULE_4__["default"].loading)
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+    className: _Banner_scss_js__WEBPACK_IMPORTED_MODULE_4__["default"].Spinner
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Spinner_Spinner_js__WEBPACK_IMPORTED_MODULE_6__.Spinner, {
+    size: "small",
+    accessibilityLabel: i18n.translate('Polaris.Button.spinnerAccessibilityLabel')
+  })), action.content) : null;
+  const primaryActionMarkup = action ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Box_Box_js__WEBPACK_IMPORTED_MODULE_7__.Box, {
+    paddingInlineEnd: "2"
+  }, action.loading ? spinnerMarkup : (0,_UnstyledButton_utils_js__WEBPACK_IMPORTED_MODULE_8__.unstyledButtonFrom)(action, {
+    className: `${_Banner_scss_js__WEBPACK_IMPORTED_MODULE_4__["default"].Button} ${_Banner_scss_js__WEBPACK_IMPORTED_MODULE_4__["default"].PrimaryAction}`
+  })) : null;
+  const secondaryActionMarkup = secondaryAction ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(SecondaryActionFrom, {
+    action: secondaryAction
+  }) : null;
+  const actionMarkup = action || secondaryAction ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Box_Box_js__WEBPACK_IMPORTED_MODULE_7__.Box, {
+    paddingBlockStart: withinContentContainer ? '3' : '4',
+    paddingBlockEnd: withinContentContainer ? '1' : undefined
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_ButtonGroup_ButtonGroup_js__WEBPACK_IMPORTED_MODULE_9__.ButtonGroup, null, primaryActionMarkup, secondaryActionMarkup)) : null;
+  let contentMarkup = null;
+
+  if (children || actionMarkup) {
+    contentMarkup = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Box_Box_js__WEBPACK_IMPORTED_MODULE_7__.Box, {
+      paddingBlockStart: "05",
+      paddingBlockEnd: "05"
+    }, children, actionMarkup);
+  }
+
+  const dismissButton = onDismiss && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: _Banner_scss_js__WEBPACK_IMPORTED_MODULE_4__["default"].Dismiss
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Button_Button_js__WEBPACK_IMPORTED_MODULE_10__.Button, {
+    plain: true,
+    icon: _shopify_polaris_icons__WEBPACK_IMPORTED_MODULE_11__.S,
+    onClick: onDismiss,
+    accessibilityLabel: "Dismiss notification"
+  }));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_utilities_banner_context_js__WEBPACK_IMPORTED_MODULE_12__.BannerContext.Provider, {
+    value: true
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: className // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+    ,
+    tabIndex: 0,
+    ref: wrapperRef,
+    role: ariaRoleType,
+    "aria-live": stopAnnouncements ? 'off' : 'polite',
+    onMouseUp: handleMouseUp,
+    onKeyUp: handleKeyUp,
+    onBlur: handleBlur
+  }, dismissButton, hideIcon ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Box_Box_js__WEBPACK_IMPORTED_MODULE_7__.Box, {
+    paddingInlineEnd: "4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Icon_Icon_js__WEBPACK_IMPORTED_MODULE_13__.Icon, {
+    source: iconName,
+    color: iconColor
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: _Banner_scss_js__WEBPACK_IMPORTED_MODULE_4__["default"].ContentWrapper
+  }, headingMarkup, contentMarkup)));
+});
+
+function SecondaryActionFrom({
+  action
+}) {
+  if (action.url) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_UnstyledLink_UnstyledLink_js__WEBPACK_IMPORTED_MODULE_14__.UnstyledLink, {
+      className: _Banner_scss_js__WEBPACK_IMPORTED_MODULE_4__["default"].SecondaryAction,
+      url: action.url,
+      external: action.external,
+      target: action.target
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+      className: _Banner_scss_js__WEBPACK_IMPORTED_MODULE_4__["default"].Text
+    }, action.content));
+  }
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_UnstyledButton_UnstyledButton_js__WEBPACK_IMPORTED_MODULE_15__.UnstyledButton, {
+    className: _Banner_scss_js__WEBPACK_IMPORTED_MODULE_4__["default"].SecondaryAction,
+    onClick: action.onAction
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+    className: _Banner_scss_js__WEBPACK_IMPORTED_MODULE_4__["default"].Text
+  }, action.content));
+}
+
+function useBannerAttributes(status) {
+  switch (status) {
+    case 'success':
+      return {
+        defaultIcon: _shopify_polaris_icons__WEBPACK_IMPORTED_MODULE_16__.S,
+        iconColor: 'success',
+        ariaRoleType: 'status'
+      };
+
+    case 'info':
+      return {
+        defaultIcon: _shopify_polaris_icons__WEBPACK_IMPORTED_MODULE_17__.S,
+        iconColor: 'highlight',
+        ariaRoleType: 'status'
+      };
+
+    case 'warning':
+      return {
+        defaultIcon: _shopify_polaris_icons__WEBPACK_IMPORTED_MODULE_18__.S,
+        iconColor: 'warning',
+        ariaRoleType: 'alert'
+      };
+
+    case 'critical':
+      return {
+        defaultIcon: _shopify_polaris_icons__WEBPACK_IMPORTED_MODULE_19__.S,
+        iconColor: 'critical',
+        ariaRoleType: 'alert'
+      };
+
+    default:
+      return {
+        defaultIcon: _shopify_polaris_icons__WEBPACK_IMPORTED_MODULE_17__.S,
+        iconColor: 'base',
+        ariaRoleType: 'status'
+      };
+  }
+}
+
+function useBannerFocus(bannerRef) {
+  const wrapperRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  const [shouldShowFocus, setShouldShowFocus] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useImperativeHandle)(bannerRef, () => ({
+    focus: () => {
+      var _wrapperRef$current;
+
+      (_wrapperRef$current = wrapperRef.current) === null || _wrapperRef$current === void 0 ? void 0 : _wrapperRef$current.focus();
+      setShouldShowFocus(true);
+    }
+  }), []);
+
+  const handleKeyUp = event => {
+    if (event.target === wrapperRef.current) {
+      setShouldShowFocus(true);
+    }
+  };
+
+  const handleBlur = () => setShouldShowFocus(false);
+
+  const handleMouseUp = event => {
+    event.currentTarget.blur();
+    setShouldShowFocus(false);
+  };
+
+  return {
+    wrapperRef,
+    handleKeyUp,
+    handleBlur,
+    handleMouseUp,
+    shouldShowFocus
+  };
+}
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/@shopify/polaris/build/esm/components/Banner/Banner.scss.js":
+/*!**********************************************************************************!*\
+  !*** ./node_modules/@shopify/polaris/build/esm/components/Banner/Banner.scss.js ***!
+  \**********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ styles)
+/* harmony export */ });
+var styles = {
+  "Banner": "Polaris-Banner",
+  "statusCritical": "Polaris-Banner--statusCritical",
+  "PrimaryAction": "Polaris-Banner__PrimaryAction",
+  "Button": "Polaris-Banner__Button",
+  "statusWarning": "Polaris-Banner--statusWarning",
+  "statusInfo": "Polaris-Banner--statusInfo",
+  "statusSuccess": "Polaris-Banner--statusSuccess",
+  "ContentWrapper": "Polaris-Banner__ContentWrapper",
+  "withinContentContainer": "Polaris-Banner--withinContentContainer",
+  "Dismiss": "Polaris-Banner__Dismiss",
+  "keyFocused": "Polaris-Banner--keyFocused",
+  "withinPage": "Polaris-Banner--withinPage",
+  "Ribbon": "Polaris-Banner__Ribbon",
+  "hasDismiss": "Polaris-Banner--hasDismiss",
+  "SecondaryAction": "Polaris-Banner__SecondaryAction",
+  "Text": "Polaris-Banner__Text",
+  "pressed": "Polaris-Banner--pressed",
+  "loading": "Polaris-Banner--loading",
+  "Spinner": "Polaris-Banner__Spinner"
+};
+
+
+
+
+/***/ }),
+
 /***/ "./node_modules/@shopify/polaris/build/esm/components/Bleed/Bleed.js":
 /*!***************************************************************************!*\
   !*** ./node_modules/@shopify/polaris/build/esm/components/Bleed/Bleed.js ***!
@@ -28832,6 +29117,39 @@ function UnstyledButton({
 
 /***/ }),
 
+/***/ "./node_modules/@shopify/polaris/build/esm/components/UnstyledButton/utils.js":
+/*!************************************************************************************!*\
+  !*** ./node_modules/@shopify/polaris/build/esm/components/UnstyledButton/utils.js ***!
+  \************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "unstyledButtonFrom": () => (/* binding */ unstyledButtonFrom)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _UnstyledButton_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UnstyledButton.js */ "./node_modules/@shopify/polaris/build/esm/components/UnstyledButton/UnstyledButton.js");
+
+
+
+function unstyledButtonFrom({
+  content,
+  onAction,
+  ...action
+}, overrides, key) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_UnstyledButton_js__WEBPACK_IMPORTED_MODULE_1__.UnstyledButton, Object.assign({
+    key: key,
+    onClick: onAction
+  }, action, overrides), content);
+}
+
+
+
+
+/***/ }),
+
 /***/ "./node_modules/@shopify/polaris/build/esm/components/UnstyledLink/UnstyledLink.js":
 /*!*****************************************************************************************!*\
   !*** ./node_modules/@shopify/polaris/build/esm/components/UnstyledLink/UnstyledLink.js ***!
@@ -29075,6 +29393,28 @@ let Key;
   Key[Key["CloseBracket"] = 221] = "CloseBracket";
   Key[Key["SingleQuote"] = 222] = "SingleQuote";
 })(Key || (Key = {}));
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/@shopify/polaris/build/esm/utilities/banner-context.js":
+/*!*****************************************************************************!*\
+  !*** ./node_modules/@shopify/polaris/build/esm/utilities/banner-context.js ***!
+  \*****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "BannerContext": () => (/* binding */ BannerContext)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+const BannerContext = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)(false);
 
 
 
@@ -34007,11 +34347,149 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _shopify_polaris__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @shopify/polaris */ "./node_modules/@shopify/polaris/build/esm/components/Banner/Banner.js");
+/* harmony import */ var _shopify_polaris__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @shopify/polaris */ "./node_modules/@shopify/polaris/build/esm/components/Page/Page.js");
+/* harmony import */ var _shopify_polaris__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @shopify/polaris */ "./node_modules/@shopify/polaris/build/esm/components/LegacyCard/LegacyCard.js");
+/* harmony import */ var _shopify_polaris__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @shopify/polaris */ "./node_modules/@shopify/polaris/build/esm/components/Form/Form.js");
+/* harmony import */ var _shopify_polaris__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @shopify/polaris */ "./node_modules/@shopify/polaris/build/esm/components/FormLayout/FormLayout.js");
+/* harmony import */ var _shopify_polaris__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @shopify/polaris */ "./node_modules/@shopify/polaris/build/esm/components/TextField/TextField.js");
+/* harmony import */ var _shopify_polaris__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @shopify/polaris */ "./node_modules/@shopify/polaris/build/esm/components/Button/Button.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _CallApi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CallApi */ "./resources/js/components/CallApi.js");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
 
 var Contact = function Contact() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Contact");
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+      name: '',
+      email: '',
+      subject: '',
+      content: ''
+    }),
+    _useState2 = _slicedToArray(_useState, 2),
+    values = _useState2[0],
+    setValues = _useState2[1];
+  var handleNameChange = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function (value) {
+    return setValues(function (prevValues) {
+      return _objectSpread(_objectSpread({}, prevValues), {}, {
+        name: value
+      });
+    });
+  }, []);
+  var handleEmailChange = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function (value) {
+    return setValues(function (prevValues) {
+      return _objectSpread(_objectSpread({}, prevValues), {}, {
+        email: value
+      });
+    });
+  }, []);
+  var handleSubjectChange = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function (value) {
+    return setValues(function (prevValues) {
+      return _objectSpread(_objectSpread({}, prevValues), {}, {
+        subject: value
+      });
+    });
+  }, []);
+  var handleContentChange = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function (value) {
+    return setValues(function (prevValues) {
+      return _objectSpread(_objectSpread({}, prevValues), {}, {
+        content: value
+      });
+    });
+  }, []);
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState4 = _slicedToArray(_useState3, 2),
+    status = _useState4[0],
+    setStatus = _useState4[1];
+  var handleSubmit = function handleSubmit() {
+    var data = {
+      name: values.name,
+      email: values.email,
+      subject: values.subject,
+      content: values.content
+    };
+    (0,_CallApi__WEBPACK_IMPORTED_MODULE_1__["default"])(window.App.appUrl + '/api/sendEmail', data).then(function (response) {
+      console.log(response);
+      setValues({
+        name: '',
+        email: '',
+        subject: '',
+        content: ''
+      });
+      setStatus('success');
+    })["catch"](function (error) {
+      console.log('failed...', error);
+      setStatus('error');
+    });
+  };
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (status === 'success') {
+      setTimeout(function () {
+        setStatus('');
+      }, 3000);
+    }
+  }, [status]);
+  var renderBanner = function renderBanner() {
+    if (status === 'success') {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_2__.Banner, {
+        status: "success"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Thanks for contacting us! We will reply back to you at your email within 12 hours. Please make sure you have created a staff account for us. It will help us support you quickly."));
+    } else if (status === 'error') {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_2__.Banner, {
+        status: "critical"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "System error, please resend later!"));
+    }
+    return null;
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    id: "page-contact"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_3__.Page, {
+    title: "Contact us"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_4__.LegacyCard, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_4__.LegacyCard.Section, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Don't hesitate to contact us if you face any problem or have any question about the app. We are happy to help you. Please give us permission to access your Shopify Admin. So we could support you quickly. We need to access Apps and Online Store ", '>', " Themes. Our email address for creating staff account")), status && renderBanner(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_4__.LegacyCard.Section, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_5__.Form, {
+    onSubmit: handleSubmit
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_6__.FormLayout, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_6__.FormLayout.Group, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_7__.TextField, {
+    type: "text",
+    label: "Your name (*)",
+    value: values.name,
+    onChange: handleNameChange,
+    autoComplete: "name"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_7__.TextField, {
+    type: "email",
+    label: "Your email (*)",
+    value: values.email,
+    onChange: handleEmailChange,
+    autoComplete: "email"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_7__.TextField, {
+    type: "text",
+    label: "Subject (*)",
+    value: values.subject,
+    onChange: handleSubjectChange,
+    autoComplete: "off"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_7__.TextField, {
+    type: "text",
+    label: "Content (*)",
+    value: values.content,
+    onChange: handleContentChange,
+    autoComplete: "off",
+    multiline: 4
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_8__.Button, {
+    primary: true,
+    submit: true,
+    disabled: values.name === "" || values.email === "" || values.subject === "" || values.content === ""
+  }, "Send")))))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Contact);
 
@@ -76691,6 +77169,34 @@ var SvgChevronRightMinor = function SvgChevronRightMinor(props) {
 
 /***/ }),
 
+/***/ "./node_modules/@shopify/polaris-icons/dist/icons/CircleAlertMajor.svg.mjs":
+/*!*********************************************************************************!*\
+  !*** ./node_modules/@shopify/polaris-icons/dist/icons/CircleAlertMajor.svg.mjs ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "S": () => (/* binding */ SvgCircleAlertMajor)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+var SvgCircleAlertMajor = function SvgCircleAlertMajor(props) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("svg", Object.assign({
+    viewBox: "0 0 20 20"
+  }, props), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
+    fillRule: "evenodd",
+    d: "M10 0c-5.514 0-10 4.486-10 10s4.486 10 10 10 10-4.486 10-10-4.486-10-10-10zm-1 6a1 1 0 1 1 2 0v4a1 1 0 1 1-2 0v-4zm1 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"
+  }));
+};
+
+
+
+
+/***/ }),
+
 /***/ "./node_modules/@shopify/polaris-icons/dist/icons/CircleCancelMinor.svg.mjs":
 /*!**********************************************************************************!*\
   !*** ./node_modules/@shopify/polaris-icons/dist/icons/CircleCancelMinor.svg.mjs ***!
@@ -76711,6 +77217,89 @@ var SvgCircleCancelMinor = function SvgCircleCancelMinor(props) {
   }, props), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
     fillRule: "evenodd",
     d: "M10 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16zm-2.293 4.293a1 1 0 0 0-1.414 1.414l2.293 2.293-2.293 2.293a1 1 0 1 0 1.414 1.414l2.293-2.293 2.293 2.293a1 1 0 1 0 1.414-1.414l-2.293-2.293 2.293-2.293a1 1 0 0 0-1.414-1.414l-2.293 2.293-2.293-2.293z"
+  }));
+};
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/@shopify/polaris-icons/dist/icons/CircleInformationMajor.svg.mjs":
+/*!***************************************************************************************!*\
+  !*** ./node_modules/@shopify/polaris-icons/dist/icons/CircleInformationMajor.svg.mjs ***!
+  \***************************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "S": () => (/* binding */ SvgCircleInformationMajor)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+var SvgCircleInformationMajor = function SvgCircleInformationMajor(props) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("svg", Object.assign({
+    viewBox: "0 0 20 20"
+  }, props), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
+    fillRule: "evenodd",
+    d: "M10 20c5.514 0 10-4.486 10-10s-4.486-10-10-10-10 4.486-10 10 4.486 10 10 10zm1-6a1 1 0 1 1-2 0v-4a1 1 0 1 1 2 0v4zm-1-9a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"
+  }));
+};
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/@shopify/polaris-icons/dist/icons/CircleTickMajor.svg.mjs":
+/*!********************************************************************************!*\
+  !*** ./node_modules/@shopify/polaris-icons/dist/icons/CircleTickMajor.svg.mjs ***!
+  \********************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "S": () => (/* binding */ SvgCircleTickMajor)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+var SvgCircleTickMajor = function SvgCircleTickMajor(props) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("svg", Object.assign({
+    viewBox: "0 0 20 20"
+  }, props), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
+    fillRule: "evenodd",
+    d: "M0 10a10 10 0 1 0 20 0 10 10 0 0 0-20 0zm15.2-1.8a1 1 0 0 0-1.4-1.4l-4.8 4.8-2.3-2.3a1 1 0 0 0-1.4 1.4l3 3c.4.4 1 .4 1.4 0l5.5-5.5z"
+  }));
+};
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/@shopify/polaris-icons/dist/icons/DiamondAlertMajor.svg.mjs":
+/*!**********************************************************************************!*\
+  !*** ./node_modules/@shopify/polaris-icons/dist/icons/DiamondAlertMajor.svg.mjs ***!
+  \**********************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "S": () => (/* binding */ SvgDiamondAlertMajor)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+var SvgDiamondAlertMajor = function SvgDiamondAlertMajor(props) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("svg", Object.assign({
+    viewBox: "0 0 20 20"
+  }, props), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
+    d: "M11.768.768a2.5 2.5 0 0 0-3.536 0l-7.464 7.464a2.5 2.5 0 0 0 0 3.536l7.464 7.464a2.5 2.5 0 0 0 3.536 0l7.464-7.464a2.5 2.5 0 0 0 0-3.536l-7.464-7.464zm-2.768 5.232a1 1 0 1 1 2 0v4a1 1 0 1 1-2 0v-4zm2 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"
   }));
 };
 

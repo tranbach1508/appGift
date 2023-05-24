@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GiftController;
 
 /*
@@ -30,4 +31,5 @@ Route::group(['prefix' => 'api','middleware' => ['iframeProtection','verifySessi
     Route::post('/gifts',                [GiftController::class, 'gifts']);
     Route::post('/deleteGift',                [GiftController::class, 'deleteGift']);
     Route::post('/test',                [GiftController::class, 'test']);
+    Route::post('/sendEmail',               [ContactController::class, 'sendEmail']);
 });
