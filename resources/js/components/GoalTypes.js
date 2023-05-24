@@ -1,23 +1,28 @@
-import React from 'react';
-import { Page } from '@shopify/polaris';
+import React,{useState} from 'react';
+import { Page,TextField } from '@shopify/polaris';
+import callapi from './CallApi';
 
 const GoalTypes = () => {
+    const [value,setValue] = useState("");
+    const submit = () =>{
+        fetch(value+'.json').then(res => res.json()).then((response) => {
+            callapi(window.App.appUrl + '/api/test', {
+                product: response.product
+            })
+            .then((data) => {
+                
+            })
+        })
+    }
     return (
         <Page>
-            <div className='goal-types'>
-                <div className='goal-type'>
-                    <img className='thumb' src={window.App.appUrl + "/images/free-gift.png"}/>
-                    <div>Free Gift Goals</div>
-                </div>
-                <div className='goal-type'>
-                    <img className='thumb' src={window.App.appUrl + "/images/free-shipping.png"}/>
-                    <div>Free Shipping Goals</div>
-                </div>
-                <div className='goal-type'>
-                    <img className='thumb' src={window.App.appUrl + "/images/discount.png"}/>
-                    <div>Discount Code Goals</div>
-                </div>
-            </div>
+            <TextField
+            label="Store name"
+            value={value}
+            onChange={(value) => setValue(value)}
+            autoComplete="off"
+            />
+            <button onClick={submit}>click</button>
         </Page>
     );
 };
