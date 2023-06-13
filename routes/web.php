@@ -30,6 +30,5 @@ Route::group(['prefix' => 'api','middleware' => ['iframeProtection','verifySessi
     Route::post('/addGift',                [GiftController::class, 'addGift']);
     Route::post('/gifts',                [GiftController::class, 'gifts']);
     Route::post('/deleteGift',                [GiftController::class, 'deleteGift']);
-    Route::post('/test',                [GiftController::class, 'test']);
     Route::post('/sendEmail',               [ContactController::class, 'sendEmail']);
 });
