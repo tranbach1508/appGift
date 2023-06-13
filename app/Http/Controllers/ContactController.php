@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 
@@ -14,6 +15,17 @@ class ContactController extends Controller
         $weekDay = date('w', strtotime($date));
         return ($weekDay == 0 || $weekDay == 6);
     }
+    public function sendMailApi($emailData)
+    {
+        
+        Mail::send([], [], function ($message) use ($emailData) {
+            $message->to($emailData['personalizations'][0]['to'][0]['email'])
+                ->from($emailData['from']['email'], $emailData['from']['name'])
+                ->replyTo($emailData['reply_to'])
+                ->subject($emailData['subject'])
+                ->setBody(view('Mail.SendEmail',$emailData)->render(), 'text/html');
+        });
+    }
     public function sendEmail(Request $request)
     {
         try {
@@ -22,12 +34,12 @@ class ContactController extends Controller
                 'personalizations' => [
                     [
                         'to' => [
-                            ['email' => 'tamanhtran473@gmail.com']
+                            ['email' => 'tranbach2000@gmail.com']
                         ]
                     ]
                 ],
                 'from' => [
-                    'email' => '19a31010010@students.hou.edu.vn',
+                    'email' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
                     'name' => $request->input('name')
                 ],
                 'reply_to' => $request->input('email'),
@@ -36,41 +48,13 @@ class ContactController extends Controller
                 'name'=> $request->name,
                 'email'=> $request->email,
                 'message'=> $request->content
-                // 'content' => [
-                //     [
-                //         'type' => 'html',
-                //         'value' => '<div style="background: #f9f9f9; padding: 20px 10px;">
-                //         <div style="max-width: 600px; margin: auto; padding: 15px 30px 25px 30px; background-color: #ffffff; border-radius: 3px; border-bottom: 1px solid #dadada; border-top: 1px solid #eaeaea;">
-                //         <table style="width: 100%; color: #000; border: 1px solid black; border-collapse: collapse; font-weight: 500;">
-                //         <tbody>
-                //         <tr>
-                //         <td style="border: 1px solid black; padding: 10px; width: 120px;">Shop url</td>
-                //         <td style="border: 1px solid black; padding: 10px;">' . $shop->url . '</td>
-                //         </tr>
-                //         <tr>
-                //         <td style="border: 1px solid black; padding: 10px; width: 120px;">Name</td>
-                //         <td style="border: 1px solid black; padding: 10px;">' . $request->name . '</td>
-                //         </tr>
-                //         <tr>
-                //         <td style="border: 1px solid black; padding: 10px; width: 120px;">Email</td>
-                //         <td style="border: 1px solid black; padding: 10px;">' . $request->email . '</td>
-                //         </tr>
-                //         <tr>
-                //         <td style="border: 1px solid black; padding: 10px; width: 120px;">Content</td>
-                //         <td style="border: 1px solid black; padding: 10px;">' . $request->content . '</td>
-                //         </tr>
-                //         </tbody>
-                //         </table>
-                //         </div>'
-                //     ]
-                // ]
             ];
 
             if (!empty($request->input('email')) && filter_var($request->input('email'), FILTER_VALIDATE_EMAIL)) {
                 $emailData['replyToId'] = $request->input('email');
             }
 
-            $shop->sendMailApi($emailData);
+            $this->sendMailApi($emailData);
 
             return response()->json([
                 'message' => 'Email sent successfully',

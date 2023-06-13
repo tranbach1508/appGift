@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
-use Illuminate\Support\Facades\Mail;
-
 class Shop extends Model
 {
     use HasFactory;
@@ -24,16 +22,5 @@ class Shop extends Model
     public function getShopifyApi()
     {
         return \PHPShopify\ShopifySDK::config(['ShopUrl' => $this->url, 'AccessToken' => $this->token, 'ApiVersion' => config('constants.SHOPIFY_API_VERSION') ]);
-    }
-    public function sendMailApi( $emailData)
-    {
-        
-        Mail::send([], [], function ($message) use ($emailData) {
-            $message->to($emailData['personalizations'][0]['to'][0]['email'])
-                ->from($emailData['from']['email'], $emailData['from']['name'])
-                ->replyTo($emailData['reply_to'])
-                ->subject($emailData['subject'])
-                ->setBody(view('Mail.SendEmail',$emailData)->render(), 'text/html');
-        });
     }
 }
