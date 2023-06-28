@@ -1,5 +1,5 @@
 import { Banner, Button, Form, FormLayout, LegacyCard, Page, TextField } from '@shopify/polaris';
-import React, { useState, useCallback, useEffect} from 'react';
+import React, { useState, useCallback } from 'react';
 
 import callapi from './CallApi';
 
@@ -11,14 +11,14 @@ const Contact = () => {
         subject: '',
         content: '',
     });
-    
+
     const handleNameChange = useCallback((value) => setValues(prevValues => ({ ...prevValues, name: value })), []);
     const handleEmailChange = useCallback((value) => setValues(prevValues => ({ ...prevValues, email: value })), []);
     const handleSubjectChange = useCallback((value) => setValues(prevValues => ({ ...prevValues, subject: value })), []);
     const handleContentChange = useCallback((value) => setValues(prevValues => ({ ...prevValues, content: value })), []);
 
     const [status, setStatus] = useState(null);
-    
+
 
     const handleSubmit = () => {
         const data = {
@@ -30,7 +30,6 @@ const Contact = () => {
 
         callapi(window.App.appUrl + '/api/sendEmail', data)
             .then((response) => {
-                console.log(response);
                 setValues({
                     name: '',
                     email: '',
@@ -44,14 +43,6 @@ const Contact = () => {
                 setStatus('error');
             });
     };
-    useEffect(() => {
-        if(status === 'success') {
-          setTimeout(() => {
-            setStatus('');
-          }, 3000);
-        }
-      }, [status]);
-    
 
     const renderBanner = () => {
         if (status === 'success') {

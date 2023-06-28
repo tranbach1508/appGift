@@ -27,27 +27,27 @@ const App = () => {
     const navigationLinks = [
         {
             label: 'Gifts',
-            destination: '/admin/gifts',
+            destination: '/gifts',
         },
         {
             label: 'Goals',
-            destination: '/admin/goal-types',
+            destination: '/goals',
         },
         {
             label: 'Progress Bar',
-            destination: '/admin/progress-bar',
+            destination: '/progress-bar',
         },
         {
             label: 'Recommend Popup',
-            destination: '/admin/recommend-popup',
+            destination: '/recommend-popup',
         },
         {
             label: 'Settings',
-            destination: '/admin/settings',
+            destination: '/settings',
         },
         {
             label: 'Contact',
-            destination: '/admin/contact',
+            destination: '/contact',
         }
     ]
     return (

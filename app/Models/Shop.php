@@ -23,4 +23,7 @@ class Shop extends Model
     {
         return \PHPShopify\ShopifySDK::config(['ShopUrl' => $this->url, 'AccessToken' => $this->token, 'ApiVersion' => config('constants.SHOPIFY_API_VERSION') ]);
     }
+    public function gifts(){
+        return $this->hasMany(Gift::class);
+    }
 }

@@ -4,25 +4,28 @@ import {
     Route
 } from "react-router-dom";
 import Dashboard from "./Dashboard";
-import GoalTypes from "./GoalTypes";
 import Gifts from "./Gifts";
 import Goals from "./Goals";
 import ProgressBar from './ProgressBar';
 import RecommendPopup from './RecommendPopup';
 import Settings from './Settings';
 import Contact from './Contact';
+import CreateGoal from './CreateGoal';
+import Goal from './Goal';
 
 const Routers = () => {
     return (
         <Suspense fallback={<div>Loading...</div>}>
             <Routes>
                 <Route exact path="/" element={<Gifts/>} />
-                <Route path="/admin/goal-types" element={<GoalTypes/>} />
-                <Route path="/admin/goals" element={<Goals/>} />
-                <Route path="/admin/progress-bar" element={<ProgressBar/>} />
-                <Route path="/admin/recommend-popup" element={<RecommendPopup/>} />
-                <Route path="/admin/settings" element={<Settings/>} />
-                <Route path="/admin/contact" element={<Contact/>} />
+                <Route path="/gifts" element={<Gifts/>} />
+                <Route path="/goals" element={<Goals/>} />
+                <Route path="/create-goal" element={<CreateGoal/>} />
+                <Route path="/goals/:id" element={<Goal/>} />
+                <Route path="/progress-bar" element={<ProgressBar/>} />
+                <Route path="/recommend-popup" element={<RecommendPopup/>} />
+                <Route path="/settings" element={<Settings/>} />
+                <Route path="/contact" element={<Contact/>} />
             </Routes>
         </Suspense>
     );
