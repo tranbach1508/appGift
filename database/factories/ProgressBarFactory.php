@@ -18,7 +18,7 @@ class ProgressBarFactory extends Factory
     {
         $status = [1, 0];
         return [
-            'name'=> $this->faker->name(),
+            
             'status'=>$this->faker->randomElement($status),
             'shop_id'=>rand(1, 5),
         ];

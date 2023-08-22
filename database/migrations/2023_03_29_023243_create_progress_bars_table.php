@@ -15,7 +15,6 @@ class CreateProgressBarsTable extends Migration
     {
         Schema::create('progress_bars', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 255);
             $table->tinyInteger('status');
             $table->json('color')->nullable();
             $table->json('style')->nullable();

@@ -35,14 +35,27 @@ const Gifts = () => {
     };
     
     const deleteGift = (product_id) => {
-        callapi(window.App.appUrl + '/api/deleteGift', {
-            product_id: product_id
-        })
-        .then((response) => {
-            if(response.data.status){
-                fetchGifts();
-            }
-        })
+        if (confirm("Are you sure you want to delete?")) {
+            callapi(window.App.appUrl + '/api/deleteGift', {
+                product_id: product_id
+            })
+            .then((response) => {
+                if(response.data.status){
+                    fetchGifts();
+                    setToast({
+                        message: 'Gift deleted',
+                        active: true,
+                        error: false
+                    })
+                }else{
+                    setToast({
+                        message: response.data.message,
+                        active: true,
+                        error: true
+                    })
+                }
+            })
+        }
     };
 
 
@@ -56,7 +69,6 @@ const Gifts = () => {
         })
     }
     const chooseProduct = (payload) => {
-        console.log(payload);
         let variants = payload.selection[0].variants.map(x => ({
             value: x.id.replace('gid://shopify/ProductVariant/', ''),
             label: x.title
@@ -168,7 +180,6 @@ const Gifts = () => {
                                         {selectedProduct ? <Button onClick={() => setSelectedProduct(null)}>Cancel</Button> : ''}
                                         <Button primary disabled={myState.giftPending} loading={myState.giftPending}
                                             submit>Create Gift</Button>
-                                        {toastMarkup}
                                     </ButtonGroup>
                                 </FormLayout>
                             </Form>
@@ -208,6 +219,7 @@ const Gifts = () => {
                         />
                     </LegacyCard.Section>
                 </LegacyCard>
+                {toastMarkup}
             </Page>
         </div>
     );

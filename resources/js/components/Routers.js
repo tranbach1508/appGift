@@ -17,6 +17,7 @@ const Routers = () => {
         <Suspense fallback={<div>Loading...</div>}>
             <Routes>
                 <Route exact path="/" element={<Gifts/>} />
+                <Route path="/admin/gifts" element={<Gifts/>}/>
                 <Route path="/admin/goal-types" element={<GoalTypes/>} />
                 <Route path="/admin/goals" element={<Goals/>} />
                 <Route path="/admin/progress-bar" element={<ProgressBar/>} />

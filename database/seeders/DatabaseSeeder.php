@@ -24,7 +24,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
            ShopsSeeder::class,
-            ProgressBarsSeeder::class,
             GoalsSeeder::class,
             GiftsSeeder::class,
             SettingsSeeder::class,

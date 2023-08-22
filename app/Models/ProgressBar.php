@@ -9,10 +9,13 @@ class ProgressBar extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name',	'status','color','style','shop_id',
+        'status','color','style','shop_id','goal_id'
     ];
     public function shop()
     {
        return $this->belongsTo(Shop::class);
+    }
+    public function goal(){
+        return $this -> belongsTo(Goal::class);
     }
 }
