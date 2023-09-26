@@ -25,21 +25,24 @@ class GiftController extends Controller
         }
         $variant['price'] = 0;
         $gift['variants'][] = $variant;
-        $new_product = $shopifyApi->Product->post($gift);
+        $new_product = $shopifyApi->Product->get($product);
         try {
+            // dd($new_product);
+            $productData = $new_product[0];
             Gift::create([
                 'shop_id' => $shop->id,
-                'product_id'=> $new_product['id'],
+                'product_id'=> $productData['id'],
                 'product_title'=> $request->title,
                 'variant_id' => $variant['id'],
                 'variant_title' => $variant['title'],
-                'product_handle'=> $new_product['handle'],
+                'product_handle'=> $productData['handle'],
                 'product_image'=>$request->image,
             ]);
             return response()-> json([
                 'status' => true
             ]);
         }catch(Exception $e) {
+            dd($e);
             return response()-> json([
                 'status' => false
             ]);

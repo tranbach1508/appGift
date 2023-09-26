@@ -100,7 +100,7 @@ const Gifts = () => {
         } else {
             data.variant_id = data.variants.find(x => x.value == selectedVariant).value;
         }
-        callapi(window.App.appUrl + '/api/addGift', data)
+        callapi(window.App.appUrl + '/api/addGift', data) 
         .then((response) => {
             if(response.data.status){
                 setToast({

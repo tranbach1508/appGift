@@ -7,53 +7,37 @@ const TopBar = ({ location }) => {
     const navigate = useNavigate();
     const menuItems = [
         {
-            url: '/admin/gifts',
+            url: '/gifts',
             icon: GiftCardMajor,
             label: "Gifts",
             submenu: null
         },
         {
-            url: '/admin/goals',
+            url: '/goals',
             icon: StoreStatusMajor,
             label: "Goals",
-            submenu: [
-                {
-                    url: '/admin/free-gift',
-                    icon: GiftCardMajor,
-                    label: "Free Gift Goals"
-                },
-                {
-                    url: '/admin/free-shipping',
-                    icon: ShipmentMajor,
-                    label: "Free Shipping Goals"
-                },
-                {
-                    url: '/admin/discount',
-                    icon: DiscountsMajor,
-                    label: "Discount Code Goals"
-                }
-            ]
+            submenu: null
         },
         {
-            url: '/admin/progress-bar',
+            url: '/progress-bar',
             icon: BuyButtonButtonLayoutMajor,
             label: "Progress Bar",
             submenu: null
         },
         {
-            url: '/admin/recommend-popup',
+            url: '/recommend-popup',
             icon: PackageMajor,
             label: "Recommend Popup",
             submenu: null
         },
         {
-            url: '/admin/settings',
+            url: '/settings',
             icon: SettingsMajor,
             label: "Settings",
             submenu: null
         },
         {
-            url: '/admin/contact',
+            url: '/contact',
             icon: EmailMajor,
             label: "Contact",
             submenu: null
@@ -79,7 +63,7 @@ const TopBar = ({ location }) => {
                     <ul className="Polaris-TopBar__Menu">
                         {menuItems.map((item, index) =>
                         (
-                            <li className={"Polaris-TopBar__Menu-Item" + (location.pathname == item.url ? " Menu-Item-Selected" : "")} key={index}>
+                            <li key={index} className={"Polaris-TopBar__Menu-Item" + (location.pathname == item.url ? " Menu-Item-Selected" : "")}>
                                 <a onClick={() => changePage(item.url)}>
                                     <Icon
                                         source={item.icon}
@@ -91,8 +75,8 @@ const TopBar = ({ location }) => {
                                 </a>
                                 {item.submenu != null ?
                                     <ul className="Polaris-TopBar__Submenu">
-                                        {item.submenu.map((submenu) => (
-                                            <li className="Polaris-TopBar__Menu-Item Submenu-Item ">
+                                        {item.submenu.map((submenu,index) => (
+                                            <li key={index} className="Polaris-TopBar__Menu-Item Submenu-Item ">
                                                 <a>
                                                     <Icon
                                                         source={submenu.icon}

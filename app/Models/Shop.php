@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Http\Request;
 
 class Shop extends Model
 {
@@ -22,5 +22,8 @@ class Shop extends Model
     public function getShopifyApi()
     {
         return \PHPShopify\ShopifySDK::config(['ShopUrl' => $this->url, 'AccessToken' => $this->token, 'ApiVersion' => config('constants.SHOPIFY_API_VERSION') ]);
+    }
+    public function gifts(){
+        return $this->hasMany(Gift::class);
     }
 }

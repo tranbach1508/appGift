@@ -3,6 +3,7 @@ import { QuestionMarkMinor } from '@shopify/polaris-icons';
 import React, { useState, useCallback, useEffect } from 'react';
 import { SketchPicker } from 'react-color';
 import callapi from './CallApi';
+import { replace } from 'lodash';
 
 const ProgressBar = () => {
     const [rangePrice, setRangePrice] = useState(10);
@@ -21,7 +22,7 @@ const ProgressBar = () => {
         active: false,
         error: false
     });
-
+    const [goals, setGoals] = useState([]);
     const handleSelectChange = useCallback((value) => {
         setSelected(value);
         handleInputChange();
@@ -94,11 +95,13 @@ const ProgressBar = () => {
         handleInputChange()
     }, []);
     const fetchData = useCallback(() => {
-        callapi(window.App.appUrl + '/api/updateData')
+        callapi(window.App.appUrl + '/api/progressBar')
             .then((response) => {
                 const data = response.data;
                 const color = data.color;
                 const style = data.style;
+                const goals = data.goal_id;
+                const gift = data.gift;
                 setColorBar(color["Color bar"]);
                 setBackgroundColor(color["Background color"]);
                 setSeparatorColor(color["Separator Color"]);
@@ -106,6 +109,23 @@ const ProgressBar = () => {
                 setRangeTextSize(style["Text size"]);
                 setSelected(style["Text Style"]);
                 setChecked(String(data.status));
+                setGoals(goals.map(item => {
+                    const goalData = {
+                        name: item.name,
+                        message: item.message,
+                        target: item.target,
+                        discount_code: item.discount_code,
+                        type: item.type,
+                        gift_id: item.gift_id,
+                    };
+                    if (item.gift_id != null) {
+                        const ProductImage = gift.find(image => image.id === item.gift_id);
+                        if (ProductImage) {
+                            goalData.gift = ProductImage.product_image;
+                        }
+                    }
+                    return goalData;
+                }));
             })
             .catch((error) => {
                 console.error('Error fetching', error);
@@ -171,116 +191,96 @@ const ProgressBar = () => {
         }
     }
     const ProgressBar = () => {
-        let maxPrice = 100;
-        if (rangePrice < 55 && rangePrice >= 20) {
-            maxPrice = 55;
+        const sortedGoals = goals.slice().sort((a, b) => a.target - b.target);
+        const messages = sortedGoals.map(goal => JSON.parse(goal.message));
+        const target = sortedGoals.map(goal => goal.target);
+        const unit = checked == 1 ? "$" : "items";
+        const message = () => {
+            const message = [];
+            const lastmessage = target.length - 1;
+            for (let i = 0; i <= target.length; i++) {
+                if (rangePrice ==0) {
+                    message.push(
+                        <div key={i} className="progress-bar-static-text" id="progress-bar-static-text-under" style={{ color: textColor, fontSize: rangeTextSize }}>
+                            {selected === 'Bold' ? (
+                                <span style={{ fontWeight: 'bold' }} dangerouslySetInnerHTML={{ __html: messages[i].cart_empty.replace('{{required}}', target[i] + unit) }}></span>
+                            ) : selected === 'Italic' ? (
+                                <span style={{ fontStyle: 'italic' }} dangerouslySetInnerHTML={{ __html: messages[i].cart_empty.replace('{{required}}', target[i] + unit) }}></span>
+                            ) : selected === 'Underline' ? (
+                                <span style={{ textDecoration: 'underline' }} dangerouslySetInnerHTML={{ __html: messages[i].cart_empty.replace('{{required}}', target[i] + unit) }}></span>
+                            ) : (
+                                <span dangerouslySetInnerHTML={{ __html: messages[i].cart_empty.replace('{{required}}', target[i] + unit) }}></span>
+                            )}
+                        </div>
+                    );
+                    break;
+                } else if (rangePrice < target[i]) {
+                    message.push(
+                        <div key={i} className="progress-bar-static-text" id="progress-bar-static-text-under" style={{ color: textColor, fontSize: rangeTextSize }}>
+                            {selected === 'Bold' ? (
+                                <span style={{ fontWeight: 'bold' }} dangerouslySetInnerHTML={{ __html: messages[i].not_reached.replace('{{remaining}}', target[i] - rangePrice + unit) }}></span>
+                            ) : selected === 'Italic' ? (
+                                <span style={{ fontStyle: 'italic' }} dangerouslySetInnerHTML={{ __html: messages[i].not_reached.replace('{{remaining}}', target[i] - rangePrice + unit) }}></span>
+                            ) : selected === 'Underline' ? (
+                                <span style={{ textDecoration: 'underline' }} dangerouslySetInnerHTML={{ __html: messages[i].not_reached.replace('{{remaining}}', target[i] - rangePrice + unit) }}></span>
+                            ) : (
+                                <span dangerouslySetInnerHTML={{ __html: messages[i].not_reached.replace('{{remaining}}', target[i] - rangePrice + unit) }}></span>
+                            )}
+                        </div>
+                    );
+                    break;
+                } else if (i === lastmessage) {
+                    message.push(
+                        <div key={i} className="progress-bar-static-text" id="progress-bar-static-text-under" style={{ color: textColor, fontSize: rangeTextSize }}>
+                            {selected === 'Bold' ? (
+                                <span style={{ fontWeight: 'bold' }} dangerouslySetInnerHTML={{ __html: messages[i].reached }}></span>
+                            ) : selected === 'Italic' ? (
+                                <span style={{ fontStyle: 'italic' }} dangerouslySetInnerHTML={{ __html: messages[i].reached }}></span>
+                            ) : selected === 'Underline' ? (
+                                <span style={{ textDecoration: 'underline' }} dangerouslySetInnerHTML={{ __html: messages[i].reached }}></span>
+                            ) : (
+                                <span dangerouslySetInnerHTML={{ __html: messages[i].reached }}></span>
+                            )}
+                        </div>
+                    );
+                }
+            }
+            return message;
         }
-        const remainingPrice = maxPrice - rangePrice;
         return (
             <div className="progress-bar-wrapper" style={{ marginTop: '50px' }}>
                 <div className="progress-bar-checkpoints" style={{ position: 'relative', width: '100%', height: '20px' }}>
-                    <div>
-                        <div className="checkpoint-image-wrapper" style={{ left: '100%', transform: 'translateY(-50%) translateX(-100%)' }}>
-                            <div style={{ position: 'relative', width: '100%', paddingTop: '100%', display: 'block' }}>
-                                <div className="progress-bar-product-img">
-                                    <img src={window.App.appUrl + "/images/discount.png"} style={{ width: '30px' }} />
+                    {sortedGoals.map((goal, index) => (
+                        <div key={index}>
+                            <div className="checkpoint-image-wrapper" style={{ left: `${goal.target}%`, transform: 'translateY(-50%) translateX(-20px)' }}>
+                                <div style={{ position: 'relative', width: '100%', paddingTop: '100%', display: 'block' }}>
+                                    <div className="progress-bar-product-img">
+                                        {goal.type === 3 ? (<Thumbnail source={window.App.appUrl + "/images/discount.png"} size="Small" />) :
+                                            goal.type === 2 ? (<Thumbnail source={window.App.appUrl + "/images/free-shipping.png"} size="small" />) :
+                                                (<Thumbnail source={goal.gift} size="small" />)}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="checkpoint-title" style={{ top: 'max(40px, 30px)', left: '100%', transform: 'translateY(-50%) translateX(-100%)' }}>
-                            <span>Discount 15%</span>
-                        </div>
-                    </div>
-                    <div>
-                        <div className="checkpoint-image-wrapper" style={{ left: '19%', transform: 'translateY(-30%) translateX(-20px)' }}>
-                            <div style={{ position: 'relative', width: '100%', paddingTop: '100%', display: 'block' }}>
-                                <div className="progress-bar-product-img">
-                                    <img src={window.App.appUrl + "/images/free-shipping.png"} style={{ width: '100%' }} />
-                                </div>
+                            <div className="checkpoint-title" style={{ top: 'max(30px, 20px)', left: `${goal.target}%`, transform: 'translateY(-30%) translateX(-20px)' }}>
+                                <span>{goal.name}</span>
                             </div>
                         </div>
-                        <div className="checkpoint-title" style={{ top: 'max(30px, 20px)', left: '19%', transform: 'translateY(-30%) translateX(-20px)' }}>
-                            <span>Free Shipping</span>
-                        </div>
-                    </div>
-                    <div>
-                        <div className="checkpoint-image-wrapper" style={{ left: '80%', transform: 'translateY(-60%) translateX(-165px)' }}>
-                            <div style={{ position: 'relative', width: '100%', paddingTop: '100%', display: 'block' }}>
-                                <a href="#">
-                                    <Thumbnail
-                                        size="Small"
-                                        source="https://cdn.shopify.com/s/files/1/0655/6096/9461/products/DT556-SAM772-MK-Default-Wooden.jpg?v=1686037410"
-                                        alt=""
-                                    />
-                                </a>
-                            </div>
-                        </div>
-                        <div className="checkpoint-title" style={{ top: 'max(30px, 20px)', left: '80%', transform: 'translateY(-30%) translateX(-160px)' }}>
-                            <span>Free Gift</span>
-                        </div>
-                    </div>
+                    ))}
                 </div>
                 <br />
                 <div id="progress-bar" style={{ width: '100%', height: '15px', top: '-40px', backgroundColor: backgroundColor, backgroundSize: 'auto 15px', overflow: 'hidden', position: 'relative', border: '1px solid rgb(151, 209, 255)', borderRadius: '7px' }}>
-                    <div>
-                        <div className="checkpoint-separator" style={{ width: '5px', left: '19%', backgroundColor: separatorColor }}>
-                            <span></span>
+                    {sortedGoals.map((goal, index) => (
+                        <div key={index}>
+                            <div className="checkpoint-separator" style={{ width: '5px', left: `${goal.target}%`, backgroundColor: separatorColor }}>
+                                <span></span>
+                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <div className="checkpoint-separator" style={{ width: '5px', left: '100%', transform: 'translateX(-100%)', backgroundColor: separatorColor }}>
-                            <span></span>
-                        </div>
-                    </div>
-                    <div>
-                        <div className="checkpoint-separator" style={{ width: '5px', left: '80%', backgroundColor: separatorColor, transform: 'translateX(-145px)' }}>
-                            <span></span>
-                        </div>
-                    </div>
+                    ))}
                     <div id="progress-bar-progress" style={{ height: '15px', backgroundColor: colorBar, transition: 'width 0.3s ease-in-out 0s', width: `${rangePrice}%` }}>
                         <span></span>
                     </div>
                 </div>
-                <div className="progress-bar-static-text" style={{ color: textColor, fontSize: rangeTextSize }}>
-                    { rangePrice < 20 ? (
-                        selected === 'Bold' ? (
-                            <span style={{ fontWeight: 'bold' }}>Get <strong>Free Shipping</strong> when you buy <strong>20$</strong>.</span>
-                        ) : selected === 'Italic' ? (
-                            <span style={{ fontStyle: 'italic' }}>Get <strong>Free Shipping</strong> when you buy <strong>20$</strong>.</span>
-                        ) : selected === 'Underline' ? (
-                            <span style={{ textDecoration: 'underline' }}>Get <strong>Free Shipping</strong> when you buy <strong>20$</strong>.</span>
-                        ) : (
-                            <span>Get <strong>Free Shipping</strong> when you buy <strong>20$</strong>.</span>
-                        )) :rangePrice >= 20 && rangePrice < 55 ? (
-                        selected === 'Bold' ? (
-                            <span style={{ fontWeight: 'bold' }}>Buy <strong>{remainingPrice}$</strong> more to get <strong>Free gift</strong>.</span>
-                        ) : selected === 'Italic' ? (
-                            <span style={{ fontStyle: 'italic' }}>Buy <strong>{remainingPrice}$</strong> more to get <strong>Free gift</strong>.</span>
-                        ) : selected === 'Underline' ? (
-                            <span style={{ textDecoration: 'underline' }}>Buy <strong>{remainingPrice}$</strong> more to get <strong>Free gift</strong>.</span>
-                        ) : (
-                            <span>Buy <strong>{remainingPrice}$</strong> more to get <strong>Free gift</strong>.</span>
-                        )) : remainingPrice != 0 ? (
-                        selected === 'Bold' ? (
-                            <span style={{ fontWeight: 'bold' }}>Buy <strong>{remainingPrice}$</strong> more to get <strong>15% Discount</strong>.</span>
-                        ) : selected === 'Italic' ? (
-                            <span style={{ fontStyle: 'italic' }}>Buy <strong>{remainingPrice}$</strong> more to get <strong>15% Discount</strong>.</span>
-                        ) : selected === 'Underline' ? (
-                            <span style={{ textDecoration: 'underline' }}>Buy <strong>{remainingPrice}$</strong> more to get <strong>15% Discount</strong>.</span>
-                        ) : (
-                            <span>Buy <strong>{remainingPrice}$</strong> more to get <strong>15% Discount</strong>.</span>
-                        )) :
-                        selected === 'Bold' ? (
-                            <span style={{ fontWeight: 'bold' }}>Congrats! You got a <strong>15% Off</strong>.</span>
-                        ) : selected === 'Italic' ? (
-                            <span style={{ fontStyle: 'italic' }}>Congrats! You got a <strong>15% Off</strong>.</span>
-                        ) : selected === 'Underline' ? (
-                            <span style={{ textDecoration: 'underline' }}>Congrats! You got a <strong>15% Off</strong>.</span>
-                        ) : (
-                            <span>Congrats! You got a <strong>15% Off</strong>.</span>
-                        )
-                    }
-                </div>
+                {message()}
             </div>
         );
     };

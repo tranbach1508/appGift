@@ -16,6 +16,6 @@ class ProgressBar extends Model
        return $this->belongsTo(Shop::class);
     }
     public function goal(){
-        return $this -> belongsTo(Goal::class);
+        return Goal::find($this->shop_id);
     }
 }
