@@ -13,12 +13,12 @@ class ProgressBarController extends Controller
         try {
             $shop = $request->get('shop');
             $goal = Goal::where('shop_id', $shop->id)->first();
-            
-            $colorBar = $request->input('colorBar', '#4A90E2');
-            $backgroundColor = $request->input('backgroundColor', '#ffffff');
-            $separatorColor = $request->input('separatorColor', '#0707F4');
-            $textColor = $request->input('textColor', '#000000');
-            
+            $color = [
+                'Color bar' => $request->input('colorBar', '#4A90E2'),
+                'Background color' => $request->input('backgroundColor', '#ffffff'),
+                'Separator Color' => $request->input('separatorColor', '#0707F4'),
+                'Text color' => $request->input('textColor', '#000000'),
+            ];
             $style = [
                 'Text Style' => $request->input('textStyle', 'None'),
                 'Text size' => $request->input('textSize', '15px'),
@@ -30,12 +30,7 @@ class ProgressBarController extends Controller
                 ['shop_id' => $shop->id],
                 [
                     'style' => json_encode($style),
-                    'color' => json_encode([
-                        'Background color' => $backgroundColor,
-                        'Color bar' => $colorBar,
-                        'Separator Color' => $separatorColor,
-                        'Text color' => $textColor,
-                    ]),
+                    'color' => json_encode($color),
                     'status' => $status,
                     'goal_id' => $goal->shop_id,
                 ]

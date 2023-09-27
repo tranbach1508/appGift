@@ -3,7 +3,6 @@ import { QuestionMarkMinor } from '@shopify/polaris-icons';
 import React, { useState, useCallback, useEffect } from 'react';
 import { SketchPicker } from 'react-color';
 import callapi from './CallApi';
-import { replace } from 'lodash';
 
 const ProgressBar = () => {
     const [rangePrice, setRangePrice] = useState(10);
@@ -254,11 +253,15 @@ const ProgressBar = () => {
                         <div key={index}>
                             <div className="checkpoint-image-wrapper" style={{ left: `${goal.target}%`, transform: 'translateY(-50%) translateX(-20px)' }}>
                                 <div style={{ position: 'relative', width: '100%', paddingTop: '100%', display: 'block' }}>
-                                    <div className="progress-bar-product-img">
+                                    {goal.target <= rangePrice ? ( <div className="progress-product-img" style={{background: separatorColor}}>
                                         {goal.type === 3 ? (<Thumbnail source={window.App.appUrl + "/images/discount.png"} size="Small" />) :
                                             goal.type === 2 ? (<Thumbnail source={window.App.appUrl + "/images/free-shipping.png"} size="small" />) :
                                                 (<Thumbnail source={goal.gift} size="small" />)}
-                                    </div>
+                                    </div>):( <div className="progress-bar-product-img">
+                                        {goal.type === 3 ? (<Thumbnail source={window.App.appUrl + "/images/discount.png"} size="Small" />) :
+                                            goal.type === 2 ? (<Thumbnail source={window.App.appUrl + "/images/free-shipping.png"} size="small" />) :
+                                                (<Thumbnail source={goal.gift} size="small" />)}
+                                    </div>)}
                                 </div>
                             </div>
                             <div className="checkpoint-title" style={{ top: 'max(30px, 20px)', left: `${goal.target}%`, transform: 'translateY(-30%) translateX(-20px)' }}>
@@ -300,8 +303,8 @@ const ProgressBar = () => {
                     <Layout.Section oneHalf>
                         <LegacyCard sectioned>
                             <LegacyCard.Section>
-                                <div className='primary-color' style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                    <div className='primary-color_title' style={{ display: 'flex', gap: '5px' }}>
+                                <div className='color-bar' style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                    <div className='color-bar_title' style={{ display: 'flex', gap: '5px' }}>
                                         <span>Color of the bar</span>
                                         <Tooltip content='The background color of the part of the bar which represents the current progress and that of the completed goals.' dismissOnMouseOut>
                                             <Icon source={QuestionMarkMinor} color='interactive' />
@@ -315,8 +318,8 @@ const ProgressBar = () => {
                                 </div>
                             </LegacyCard.Section>
                             <LegacyCard.Section>
-                                <div className='secondary-color' style={{ display: 'flex', justifyContent: 'space-between' }} >
-                                    <div className='secondary-color_title' style={{ display: 'flex', gap: '5px' }}>
+                                <div className='background-color' style={{ display: 'flex', justifyContent: 'space-between' }} >
+                                    <div className='background-color_title' style={{ display: 'flex', gap: '5px' }}>
                                         <span>Bar background color</span>
                                         <Tooltip content='The background color of the part of the bar which represents the current progress and that of the completed goals.' dismissOnMouseOut>
                                             <Icon source={QuestionMarkMinor} color='interactive' />

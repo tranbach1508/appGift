@@ -82,6 +82,7 @@
         }
     }
 }
+
 #page-gifts {
     .Polaris-Inline-Item {
         display: flex;
@@ -144,34 +145,42 @@
         }
     }
 }
-#create-goal-page{
-    .Polaris-Layout{
+
+#create-goal-page {
+    .Polaris-Layout {
         position: relative;
-        .Polaris-Layout__Section--oneHalf:nth-child(2){
+
+        .Polaris-Layout__Section--oneHalf:nth-child(2) {
             position: sticky;
             top: 56px;
-            .preview-progress-bar{
+
+            .preview-progress-bar {
                 background-color: rgb(5, 175, 242);
                 padding: 12px;
-                .preview-progress-bar__message{
+
+                .preview-progress-bar__message {
                     text-align: center;
                     color: #fff;
                     font-size: 16px;
                     font-weight: 500;
-                    strong{
+
+                    strong {
                         color: #dc5454;
                     }
                 }
-                .preview-progress-bar__bar{
+
+                .preview-progress-bar__bar {
                     margin-top: 10px;
                     position: relative;
-                    .preview-progress-bar__bar-bg{
+
+                    .preview-progress-bar__bar-bg {
                         height: 10px;
                         display: block;
                         background: #ebebeb;
                         border-radius: 5px;
                     }
-                    .preview-progress-bar__bar-track-active{
+
+                    .preview-progress-bar__bar-track-active {
                         position: absolute;
                         top: 0;
                         left: 0;
@@ -181,11 +190,14 @@
                     }
                 }
             }
-            .cart-items{
+
+            .cart-items {
                 margin-top: 15px;
-                .cart-item{
+
+                .cart-item {
                     gap: 10px;
-                    .cart-item__info{
+
+                    .cart-item__info {
                         flex: 1;
                         display: flex;
                         flex-direction: column;
@@ -195,7 +207,8 @@
             }
         }
     }
-    .unsaved-bar{
+
+    .unsaved-bar {
         display: flex;
         position: fixed;
         top: 0;
@@ -207,24 +220,29 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        .unsaved-text{
+
+        .unsaved-text {
             color: #f1f2f4;
             font-size: 16px;
             line-height: 24px;
             font-weight: 600;
         }
-        .Polaris-Button--outline{
+
+        .Polaris-Button--outline {
             color: #f1f2f4;
-            &:hover{
+
+            &:hover {
                 background-color: #616a75;
             }
         }
     }
 }
+
 #progressbar {
     .Polaris-Page {
         max-width: 100% !important;
     }
+
     .unsaved-bar {
         display: flex;
         position: fixed;
@@ -284,12 +302,15 @@
         overflow: hidden;
         text-align: center;
     }
-    #progress-bar-static-text-under{
+
+    #progress-bar-static-text-under {
         margin-top: 25px;
     }
-    .progress-bar-static-text{
+
+    .progress-bar-static-text {
         text-align: center;
     }
+
     .button-color {
         border: 1px solid #5b5959;
         cursor: pointer;
@@ -297,5 +318,20 @@
         height: 25px;
         vertical-align: middle;
         width: 55px;
+    }
+
+    .progress-product-img {
+        height: 50px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .progress-bar-product-img{
+        height: 50px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
     }
 }
